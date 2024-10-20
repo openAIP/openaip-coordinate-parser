@@ -10,7 +10,7 @@
         }
     ],
     "type": "module",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "main": "index.js",
     "repository": {
         "type": "git",
