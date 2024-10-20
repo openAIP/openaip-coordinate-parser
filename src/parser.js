@@ -73,4 +73,15 @@ export class Parser {
     getLongitude() {
         return this.longitude;
     }
+
+    /**
+     * Resets the parser to its initial state.
+     *
+     * @returns {void}
+     */
+    reset() {
+        this.latitude = null;
+        this.longitude = null;
+        this.parsers.forEach((p) => p.reset());
+    }
 }

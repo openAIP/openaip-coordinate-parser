@@ -73,4 +73,14 @@ export class DecimalFormat {
             longitude: parseFloat(lon),
         };
     }
+
+    /**
+     * Resets the parser to its initial state.
+     *
+     * @return {void}
+     */
+    reset() {
+        this.latitude = null;
+        this.longitude = null;
+    }
 }
