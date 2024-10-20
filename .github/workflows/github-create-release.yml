@@ -1,0 +1,84 @@
+on:
+    push:
+        # Sequence of patterns matched against refs/tags
+        tags:
+            - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Create Release
+
+jobs:
+    run-tests:
+        name: Run tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  registry-url: https://npm.pkg.github.com/
+                  scope: '@openaip'
+            - run: npm install
+              env:
+                  #NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  NODE_AUTH_TOKEN: ${{secrets.AUTOMATOR_PAT_PACKAGE_TOKEN}}
+            - run: npm run test
+              env:
+                  #NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  NODE_AUTH_TOKEN: ${{secrets.AUTOMATOR_PAT_PACKAGE_TOKEN}}
+            - run: npm run lint
+
+    create-release:
+        name: Create Release
+        needs: run-tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+                  body: |
+                      Changes in this Release
+
+                      Various fixes and improvements.
+                      ${{ github.event.head_commit.message }}
+                  draft: false
+                  prerelease: false
+
+    publish-package-github:
+        needs: run-tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  registry-url: https://npm.pkg.github.com/
+                  scope: '@openaip'
+            - run: npm ci --only=prod
+              env:
+                  #NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  NODE_AUTH_TOKEN: ${{secrets.AUTOMATOR_PAT_PACKAGE_TOKEN}}
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    publish-package-npm:
+        needs: run-tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  registry-url: https://registry.npmjs.org
+                  scope: '@openaip'
+            - run: npm ci --only=prod
+            - run: npm publish --access public
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

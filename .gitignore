@@ -1,0 +1,6 @@
+.idea/*
+coverage/*
+node_modules/*
+.env*
+.npmrc
+nohup.out

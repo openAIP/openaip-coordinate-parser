@@ -1,0 +1,54 @@
+{
+    "name": "@openaip/openaip-coordinate-parser",
+    "version": "0.1.0",
+    "description": "Parser that extracts coordinates from a variety of formatted lat/lon strings.",
+    "authors": [
+        {
+            "name": "Stephan Besser",
+            "email": "stephan@openaip.net",
+            "role": "Lead developer"
+        }
+    ],
+    "type": "module",
+    "license": "UNLICENSED",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/openaip/openaip-coordinate-parser.git"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "bugs": {
+        "url": "https://github.com/openaip/openaip-coordinate-parser/issues"
+    },
+    "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
+    "scripts": {
+        "test": "vitest run",
+        "lint": "eslint -c eslint.config.js .",
+        "run-security-audit": "npm audit --omit=dev",
+        "format": "prettier --plugin-search-dir . --write .",
+        "update-packages": "ncu --target minor --upgrade && npm install && npm audit fix"
+    },
+    "dependencies": {
+        "check-types": "^11.2.3",
+        "clean-deep": "^3.4.0"
+    },
+    "devDependencies": {
+        "app-root-path": "^3.1.0",
+        "@babel/eslint-parser": "^7.25.7",
+        "@babel/preset-env": "^7.25.7",
+        "@eslint/js": "^9.12.0",
+        "@types/check-types": "^11.2.2",
+        "@vitest/coverage-v8": "^2.1.2",
+        "ajv": "^8.17.1",
+        "eslint": "^9.12.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-only-warn": "^1.1.0",
+        "nodemon": "^3.1.7",
+        "npm-check-updates": "^16.14.20",
+        "prettier": "^3.3.3",
+        "vite": "^5.4.8",
+        "vitest": "^2.1.2"
+    }
+}
