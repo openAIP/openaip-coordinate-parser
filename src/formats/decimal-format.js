@@ -8,7 +8,7 @@ const REGEX = /(-?\d+\.\d+)\s*[,\s]\s*(-?\d+\.\d+)/;
  */
 export class DecimalFormat {
     /**
-     * @param {import('./types').openaip.ParserOptions} [options]
+     * @param {import('../types').openaip.FormatParserOptions} [options]
      * @param {number} [options.precision] - The number of decimal places to round to. Default is 3.
      */
     constructor(options) {
@@ -47,7 +47,7 @@ export class DecimalFormat {
 
     /**
      * @param {string} coordinateString
-     * @return {import('./types').openaip.CoordinateParser.Coordinate}
+     * @return {import('../types').openaip.CoordinateParser.Coordinate}
      */
     parse(coordinateString) {
         if (checkTypes.nonEmptyString(coordinateString) === false) {
