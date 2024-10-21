@@ -1,8 +1,5 @@
 import checkTypes from 'check-types';
 
-// default catch-all
-const REGEX = /.*/;
-
 export class BaseFormat {
     /**
      * @param {import('../types').openaip.FormatParserOptions} [options]
@@ -25,16 +22,6 @@ export class BaseFormat {
         this.longitude = null;
         /** @type {number|null} */
         this.latitude = null;
-    }
-
-    /**
-     * Checks if the given decimal strings can be parsed by this parser.
-     *
-     * @param {string} coordinateString
-     * @return {boolean}
-     */
-    static canParse(coordinateString) {
-        throw new Error('Not implemented');
     }
 
     /**

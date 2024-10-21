@@ -1,5 +1,7 @@
 import checkTypes from 'check-types';
 import { DecimalFormat } from './formats/decimal-format.js';
+import { DecimalHemiFormat } from './formats/decimal-hemi-format.js';
+import { DecimalSexaFormat } from './formats/decimal-sexa-format.js';
 
 export class Parser {
     /**
@@ -25,7 +27,12 @@ export class Parser {
         this.latitude = null;
         /** @type {number|null} */
         this.longitude = null;
-        this.parsers = [new DecimalFormat(this.opts)];
+        /** @type {import('./types').openaip.FormatParser.Parser[]} */
+        this.parsers = [
+            new DecimalFormat(this.opts),
+            new DecimalHemiFormat(this.opts),
+            new DecimalSexaFormat(this.opts),
+        ];
 
         try {
             const { longitude, latitude } = this.parse(coordinateString);
