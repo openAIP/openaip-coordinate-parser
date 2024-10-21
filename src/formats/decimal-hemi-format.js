@@ -2,17 +2,18 @@ import checkTypes from 'check-types';
 import { isNumeric } from '../is-numeric.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /(-?\d+\.\d+)\s*[,\s]\s*(-?\d+\.\d+)/;
+const REGEX = /(-?\d+\.\d+)\s*([NS])\s*[, ]\s*(-?\d+\.\d+)\s*([EW])/;
 
 /**
- * Parses coordinates strings in decimal format. Coordinate ordering is always latitude, longitude.
+ * Parses coordinates strings in decimal format with hemisphere attributes. Coordinate ordering is
+ * always latitude, longitude.
  *
  * Supported formats:
  *
- * 1.234, 5.678
- * 1.234 5.678
+ * 1.234 N, 5.678 E
+ * 1.234 N 5.678 E
  */
-export class DecimalFormat extends BaseFormat {
+export class DecimalHemiFormat extends BaseFormat {
     /**
      * @param {import('../types').openaip.FormatParserOptions} [options]
      * @param {number} [options.precision] - The number of decimal places to round to. Default is 3.
@@ -35,7 +36,7 @@ export class DecimalFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const [, latitude, longitude] = match;
+        const [, latitude, , longitude] = match;
 
         if (isNumeric(latitude) === false || isNumeric(longitude) === false) {
             throw new Error('Invalid coordinate string');

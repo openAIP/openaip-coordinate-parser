@@ -25,6 +25,26 @@ describe('parse', () => {
         expect(() => df.parse('')).toThrow('coordinateString must be a non-empty string');
     });
 
+    it('throws an error if latitude is out of bounds', () => {
+        const df = new DecimalFormat();
+        expect(() => df.parse('91.234, 5.678')).toThrow('latitude must be within the range of -90 to 90');
+    });
+
+    it('throws an error if latitude is out of bounds negative', () => {
+        const df = new DecimalFormat();
+        expect(() => df.parse('-91.234 5.678')).toThrow('latitude must be within the range of -90 to 90');
+    });
+
+    it('throws an error if longitude is out of bounds', () => {
+        const df = new DecimalFormat();
+        expect(() => df.parse('1.234, 181.678')).toThrow('longitude must be within the range of -180 to 180');
+    });
+
+    it('throws an error if longitude is out of bounds negative', () => {
+        const df = new DecimalFormat();
+        expect(() => df.parse('1.234 -181.678')).toThrow('longitude must be within the range of -180 to 180');
+    });
+
     it("returns the correct latitude and longitude for '1.234, 5.678'", () => {
         const df = new DecimalFormat();
         const result = df.parse('1.234, 5.678');
