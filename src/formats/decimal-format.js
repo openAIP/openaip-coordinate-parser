@@ -2,13 +2,14 @@ import checkTypes from 'check-types';
 import { isNumeric } from '../is-numeric.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(-?\d{1,2}\.\d+)\s*[,\s]\s*(-?\d{1,3}\.\d+)$/;
+const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*[,\s]\s*(-?\d{1,3}(\.\d+)?)$/;
 
 /**
  * Parses coordinates strings in decimal format. Coordinate ordering is always latitude, longitude.
  *
  * Supported formats:
  *
+ * 10, 12
  * 1.234, 5.678
  * 1.234,5.678
  * 1.234 5.678
@@ -39,8 +40,8 @@ export class DecimalFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const [, latitude, longitude] = match;
-
+        const latitude = match[1];
+        const longitude = match[3];
         if (isNumeric(latitude) === false || isNumeric(longitude) === false) {
             throw new Error('Invalid coordinate string');
         }

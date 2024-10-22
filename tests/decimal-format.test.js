@@ -55,6 +55,13 @@ describe('parse', () => {
         expect(() => formatParser.parse('1.234 -181.678')).toThrow('longitude must be within the range of -180 to 180');
     });
 
+    it("returns the correct latitude and longitude for '10, 13'", () => {
+        const formatParser = new DecimalFormat();
+        const result = formatParser.parse('10, 13');
+        expect(result.latitude).toBe(10);
+        expect(result.longitude).toBe(13);
+    });
+
     it("returns the correct latitude and longitude for '1.234, 5.678'", () => {
         const formatParser = new DecimalFormat();
         const result = formatParser.parse('1.234, 5.678');

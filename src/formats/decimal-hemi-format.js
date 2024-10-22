@@ -2,7 +2,7 @@ import checkTypes from 'check-types';
 import { isNumeric } from '../is-numeric.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(-?\d{1,2}\.\d+)\s*([NS])\s*[, ]?\s*(-?\d{1,3}\.\d+)\s*([EW])$/;
+const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([EW])$/;
 
 /**
  * Parses coordinates strings in decimal format with hemisphere notations. Coordinate ordering is
@@ -10,6 +10,7 @@ const REGEX = /^(-?\d{1,2}\.\d+)\s*([NS])\s*[, ]?\s*(-?\d{1,3}\.\d+)\s*([EW])$/;
  *
  * Supported formats:
  *
+ * 12N,56E
  * 12.234 N 56.678 E
  * 12.234 N, 56.678 E
  * 12.234N,56.678E
@@ -41,8 +42,8 @@ export class DecimalHemiFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const [, latitude, , longitude] = match;
-
+        const latitude = match[1];
+        const longitude = match[4];
         if (isNumeric(latitude) === false || isNumeric(longitude) === false) {
             throw new Error('Invalid coordinate string');
         }

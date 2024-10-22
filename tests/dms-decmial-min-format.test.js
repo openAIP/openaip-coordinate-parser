@@ -61,6 +61,13 @@ describe('parse', () => {
         );
     });
 
+    it("returns the correct latitude and longitude for '4007N 7407W'", () => {
+        const formatParser = new DmsDecimalMinFormat();
+        const result = formatParser.parse('4007N 7407W');
+        expect(result.latitude).toBe(40.117);
+        expect(result.longitude).toBe(-74.117);
+    });
+
     it("returns the correct latitude and longitude for '4007.38N 7407.38W'", () => {
         const formatParser = new DmsDecimalMinFormat();
         const result = formatParser.parse('4007.38N 7407.38W');

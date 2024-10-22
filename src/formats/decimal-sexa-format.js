@@ -2,7 +2,7 @@ import checkTypes from 'check-types';
 import { isNumeric } from '../is-numeric.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(-?\d{1,2}\.\d+)\s*(°)\s*[, ]\s*(-?\d{1,3}\.\d+)\s*(°)$/;
+const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*(°)\s*[, ]\s*(-?\d{1,3}(\.\d+)?)\s*(°)$/;
 
 /**
  * Parses coordinates strings in decimal format with sexagesimal notation. Coordinate ordering is
@@ -40,8 +40,8 @@ export class DecimalSexaFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const [, latitude, , longitude] = match;
-
+        const latitude = match[1];
+        const longitude = match[4];
         if (isNumeric(latitude) === false || isNumeric(longitude) === false) {
             throw new Error('Invalid coordinate string');
         }

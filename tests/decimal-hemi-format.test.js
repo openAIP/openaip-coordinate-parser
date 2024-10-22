@@ -58,6 +58,13 @@ describe('parse', () => {
         );
     });
 
+    it("returns the correct latitude and longitude for '12N 56E'", () => {
+        const formatParser = new DecimalHemiFormat();
+        const result = formatParser.parse('12N 56E');
+        expect(result.latitude).toBe(12);
+        expect(result.longitude).toBe(56);
+    });
+
     it("returns the correct latitude and longitude for '1.234N 5.678E'", () => {
         const formatParser = new DecimalHemiFormat();
         const result = formatParser.parse('1.234N 5.678E');

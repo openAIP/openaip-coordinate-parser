@@ -1,13 +1,14 @@
 import checkTypes from 'check-types';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(\d{3,4}\.\d+\s*[NS])\s*(\d{3,5}\.\d+\s*[EW])$/;
+const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
 
 /**
  * Parses coordinates strings in DMS format with decimal minutes.
  *
  * Supported formats:
  *
+ * 4007N 7407W
  * 4007.38N7407.38W
  * 4007.38 N 7407.38 W
  * 4007.38N 7407.38W
@@ -39,7 +40,8 @@ export class DmsDecimalMinFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const [, latitude, longitude] = match;
+        const latitude = match[1];
+        const longitude = match[3];
         // to DMS
         const dmsLat = this.toDms(latitude.replace(/\s/g, ''));
         const dmsLon = this.toDms(longitude.replace(/\s/g, ''));
@@ -71,12 +73,12 @@ export class DmsDecimalMinFormat extends BaseFormat {
             throw new Error('value must be a non-empty string');
         }
 
-        const match = value.match(/(\d{2,3})(\d{2})\.(\d+)([NSWE])/);
+        const match = value.match(/^(\d{2,3})(\d{2})(\.\d+)?([NSWE])$/);
         if (match) {
             return {
                 degrees: parseInt(match[1], 10),
                 minutes: parseInt(match[2], 10),
-                seconds: Math.round(60 * parseFloat(`0.${match[3]}`)),
+                seconds: Math.round(60 * parseFloat(`0${match[3]}`)),
                 direction: match[4],
             };
         } else {

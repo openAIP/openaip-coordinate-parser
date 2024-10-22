@@ -63,6 +63,13 @@ describe('parse', () => {
         );
     });
 
+    it("returns the correct latitude and longitude for '12° 5°'", () => {
+        const formatParser = new DecimalSexaFormat();
+        const result = formatParser.parse('12° 5°');
+        expect(result.latitude).toBe(12);
+        expect(result.longitude).toBe(5);
+    });
+
     it("returns the correct latitude and longitude for '1.234° 5.678°'", () => {
         const formatParser = new DecimalSexaFormat();
         const result = formatParser.parse('1.234° 5.678°');
