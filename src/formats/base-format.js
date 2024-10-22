@@ -1,4 +1,5 @@
 import checkTypes from 'check-types';
+import { isNumeric } from '../is-numeric.js';
 
 export class BaseFormat {
     /**
@@ -29,12 +30,12 @@ export class BaseFormat {
      * number and within the range of -180 to 180. If the value is not valid, the method throws an
      * error.
      *
-     * @param {string} lonValue
+     * @param {string|number} lonValue
      * @return {void}
      */
     enforceValidLongitude(lonValue) {
-        if (checkTypes.nonEmptyString(lonValue) === false) {
-            throw new Error('longitude must be a non-empty string');
+        if (isNumeric(lonValue) === false) {
+            throw new Error('longitude must be numeric');
         }
 
         const lon = parseFloat(lonValue);
@@ -50,12 +51,12 @@ export class BaseFormat {
      * Enforces that a given input string is a valid latitude value. This means that the value is a
      * number and within the range of -90 to 90. If the value is not valid, the method throws an
      *
-     * @param {string} latValue
+     * @param {string|number} latValue
      * @return {void}
      */
     enforceValidLatitude(latValue) {
-        if (checkTypes.nonEmptyString(latValue) === false) {
-            throw new Error('latitude must be a non-empty string');
+        if (isNumeric(latValue) === false) {
+            throw new Error('latitude must be numeric');
         }
 
         const lat = parseFloat(latValue);
@@ -65,6 +66,59 @@ export class BaseFormat {
         if (lat < -90 || lat > 90) {
             throw new Error('latitude must be within the range of -90 to 90');
         }
+    }
+
+    /**
+     * Enforces that a given input string does not contain a hyphen. If the value contains a hyphen,
+     * the method throws an error.
+     *
+     * @param {string} coordinateString
+     * @return {void}
+     */
+    enforceNoHyphen(coordinateString) {
+        if (coordinateString.includes('-')) {
+            throw new Error('Coordinates must not contain a hyphen');
+        }
+    }
+
+    /**
+     * Converts DMS coordinate parts to a decimal value.
+     *
+     * @param {import('../types').openaip.CoordinateParser.DmsCoordinate} dms
+     * @return {number} - The decimal value.
+     */
+    dmsToDecimal(dms) {
+        if (checkTypes.nonEmptyObject(dms) === false) {
+            throw new Error('dms must be an non-empty object');
+        }
+
+        const { degrees, minutes, seconds, direction } = dms;
+
+        if (checkTypes.number(degrees) === false) {
+            throw new Error('degrees must be a number');
+        }
+        if (checkTypes.number(minutes) === false) {
+            throw new Error('minutes must be a number');
+        }
+        if (checkTypes.number(seconds) === false) {
+            throw new Error('seconds must be a number');
+        }
+        if (checkTypes.nonEmptyString(direction) === false) {
+            throw new Error('direction must be a non-empty string');
+        }
+
+        // Calculate the decimal value
+        let decimal =
+            parseInt(degrees.toString()) +
+            parseFloat(minutes.toString()) / 60 +
+            (seconds ? parseFloat(seconds.toString()) / 3600 : 0);
+
+        // Adjust for direction (North/East = positive, South/West = negative)
+        if (direction === 'S' || direction === 'W') {
+            decimal = -decimal;
+        }
+
+        return decimal;
     }
 
     /**

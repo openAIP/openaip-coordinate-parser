@@ -2,6 +2,8 @@ import checkTypes from 'check-types';
 import { DecimalFormat } from './formats/decimal-format.js';
 import { DecimalHemiFormat } from './formats/decimal-hemi-format.js';
 import { DecimalSexaFormat } from './formats/decimal-sexa-format.js';
+import { DecimalSexaHemiFormat } from './formats/decimal-sexa-hemi-format.js';
+import { DmsDecimalMinFormat } from './formats/dms-decimal-min-format.js';
 
 export class Parser {
     /**
@@ -29,9 +31,16 @@ export class Parser {
         this.longitude = null;
         /** @type {import('./types').openaip.FormatParser.Parser[]} */
         this.parsers = [
+            /** @type import('../types').openaip.FormatParser.Parser */
             new DecimalFormat(this.opts),
+            /** @type import('../types').openaip.FormatParser.Parser */
             new DecimalHemiFormat(this.opts),
+            /** @type import('../types').openaip.FormatParser.Parser */
             new DecimalSexaFormat(this.opts),
+            /** @type import('../types').openaip.FormatParser.Parser */
+            new DecimalSexaHemiFormat(this.opts),
+            /** @type import('../types').openaip.FormatParser.Parser */
+            new DmsDecimalMinFormat(this.opts),
         ];
 
         try {

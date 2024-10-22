@@ -2,7 +2,7 @@ import checkTypes from 'check-types';
 import { isNumeric } from '../is-numeric.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /(-?\d+\.\d+)\s*(°)\s*[, ]\s*(-?\d+\.\d+)\s*(°)/;
+const REGEX = /^(-?\d{1,2}\.\d+)\s*(°)\s*[, ]\s*(-?\d{1,3}\.\d+)\s*(°)$/;
 
 /**
  * Parses coordinates strings in decimal format with sexagesimal notation. Coordinate ordering is
@@ -12,6 +12,7 @@ const REGEX = /(-?\d+\.\d+)\s*(°)\s*[, ]\s*(-?\d+\.\d+)\s*(°)/;
  *
  * 1.234° 5.678°
  * 1.234°, 5.678°
+ * 1.234°,5.678°
  */
 export class DecimalSexaFormat extends BaseFormat {
     /**
@@ -29,6 +30,9 @@ export class DecimalSexaFormat extends BaseFormat {
     parse(coordinateString) {
         if (checkTypes.nonEmptyString(coordinateString) === false) {
             throw new Error('coordinateString must be a non-empty string');
+        }
+        if (DecimalSexaFormat.canParse(coordinateString) === false) {
+            throw new Error('Invalid coordinate string');
         }
 
         // use the regex to parse the latitude and longitude
@@ -56,6 +60,10 @@ export class DecimalSexaFormat extends BaseFormat {
         };
     }
 
+    /**
+     * @param {string} coordinateString
+     * @return {boolean}
+     */
     static canParse(coordinateString) {
         return REGEX.test(coordinateString);
     }
