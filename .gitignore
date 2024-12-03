@@ -1,6 +1,8 @@
-.idea/*
-coverage/*
-node_modules/*
+.idea/
+.vscode/
+coverage/
+node_modules/
 .env*
 .npmrc
 nohup.out
+dist/

@@ -1,5 +1,7 @@
-import checkTypes from 'check-types';
+import { z } from 'zod';
 import { isNumeric } from '../is-numeric.js';
+import type { Coordinate } from '../types.js';
+import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
 const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([EW])$/;
@@ -17,26 +19,12 @@ const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([E
  * 12.234N56.678E
  */
 export class DecimalHemiFormat extends BaseFormat {
-    /**
-     * @param {import('../types').openaip.FormatParserOptions} [options]
-     * @param {number} [options.precision] - The number of decimal places to round to. Default is 3.
-     */
-    constructor(options) {
-        super(options);
-    }
+    parse(coordinateString: string): Coordinate {
+        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-    /**
-     * @param {string} coordinateString
-     * @return {import('../types').openaip.CoordinateParser.Coordinate}
-     */
-    parse(coordinateString) {
-        if (checkTypes.nonEmptyString(coordinateString) === false) {
-            throw new Error('coordinateString must be a non-empty string');
-        }
         if (DecimalHemiFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
-
         // use the regex to parse the latitude and longitude
         const match = coordinateString.match(REGEX);
         if (match == null) {
@@ -48,11 +36,8 @@ export class DecimalHemiFormat extends BaseFormat {
             throw new Error('Invalid coordinate string');
         }
 
-        // enforce valid latitude
         this.enforceValidLatitude(latitude);
-        // enforce valid longitude
         this.enforceValidLongitude(longitude);
-
         const lat = parseFloat(latitude).toFixed(this.precision);
         const lon = parseFloat(longitude).toFixed(this.precision);
 
@@ -62,11 +47,9 @@ export class DecimalHemiFormat extends BaseFormat {
         };
     }
 
-    /**
-     * @param {string} coordinateString
-     * @return {boolean}
-     */
-    static canParse(coordinateString) {
+    static canParse(coordinateString: string): boolean {
+         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
+         
         return REGEX.test(coordinateString);
     }
 }

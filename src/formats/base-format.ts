@@ -1,47 +1,62 @@
-import checkTypes from 'check-types';
+import { z } from 'zod';
 import { isNumeric } from '../is-numeric.js';
+import { DmsCoordinateSchema, type Coordinate, type DmsCoordinate } from '../types.js';
+import { validateSchema } from '../validate-schema.js';
 
-export class BaseFormat {
-    /**
-     * @param {import('../types').openaip.FormatParserOptions} [options]
-     * @param {number} [options.precision] - The number of decimal places to round to. Default is 3.
-     */
-    constructor(options) {
+export const OptionsSchema = z
+    .object({
+        precision: z.number().optional(),
+    })
+    .strict()
+    .optional()
+    .describe('OptionsSchema');
+export type Config = z.infer<typeof OptionsSchema>;
+
+export interface IFormatParser {
+    precision: number;
+    longitude: number | undefined;
+    latitude: number | undefined;
+
+    parse(coordinateString: string): Coordinate;
+    enforceValidLongitude(lonValue: unknown): void;
+    enforceValidLatitude(latValue: unknown): void;
+    enforceNoHyphen(coordinateString: string): void;
+    dmsToDecimal(dms: DmsCoordinate): number;
+    reset(): void;
+}
+
+export class BaseFormat implements IFormatParser {
+    precision: number;
+    longitude: number | undefined;
+    latitude: number | undefined;
+
+    constructor(options?: Config) {
+        validateSchema(options, OptionsSchema, { assert: true, name: 'config' });
+
         const defaultOptions = { precision: 3 };
         const { precision } = { ...defaultOptions, ...options };
 
-        if (options != null && checkTypes.object(options) === false) {
-            throw new Error('options must be an object');
-        }
-        if (checkTypes.number(precision) === false) {
-            throw new Error('precision must be a number');
-        }
-
-        /** @type {number} */
         this.precision = precision;
-        /** @type {number|null} */
-        this.longitude = null;
-        /** @type {number|null} */
-        this.latitude = null;
+    }
+
+    parse(coordinateString: string): Coordinate {
+        throw new Error('Method not implemented.');
+    }
+
+    static canParse(coordinateString: string): boolean {
+        throw new Error('Method not implemented.');
     }
 
     /**
      * Enforces that a given input string is a valid longitude value. This means that the value is a
      * number and within the range of -180 to 180. If the value is not valid, the method throws an
      * error.
-     *
-     * @param {string|number} lonValue
-     * @return {void}
      */
     enforceValidLongitude(lonValue) {
         if (isNumeric(lonValue) === false) {
             throw new Error('longitude must be numeric');
         }
-
         const lon = parseFloat(lonValue);
-        if (checkTypes.number(lon) === false) {
-            throw new Error('longitude must be a number');
-        }
         if (lon < -180 || lon > 180) {
             throw new Error('longitude must be within the range of -180 to 180');
         }
@@ -50,19 +65,12 @@ export class BaseFormat {
     /**
      * Enforces that a given input string is a valid latitude value. This means that the value is a
      * number and within the range of -90 to 90. If the value is not valid, the method throws an
-     *
-     * @param {string|number} latValue
-     * @return {void}
      */
     enforceValidLatitude(latValue) {
         if (isNumeric(latValue) === false) {
             throw new Error('latitude must be numeric');
         }
-
         const lat = parseFloat(latValue);
-        if (checkTypes.number(lat) === false) {
-            throw new Error('latitude must be a number');
-        }
         if (lat < -90 || lat > 90) {
             throw new Error('latitude must be within the range of -90 to 90');
         }
@@ -71,11 +79,10 @@ export class BaseFormat {
     /**
      * Enforces that a given input string does not contain a hyphen. If the value contains a hyphen,
      * the method throws an error.
-     *
-     * @param {string} coordinateString
-     * @return {void}
      */
-    enforceNoHyphen(coordinateString) {
+    enforceNoHyphen(coordinateString: string): void {
+        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
+
         if (coordinateString.includes('-')) {
             throw new Error('Coordinates must not contain a hyphen');
         }
@@ -83,29 +90,11 @@ export class BaseFormat {
 
     /**
      * Converts DMS coordinate parts to a decimal value.
-     *
-     * @param {import('../types').openaip.CoordinateParser.DmsCoordinate} dms
-     * @return {number} - The decimal value.
      */
-    dmsToDecimal(dms) {
-        if (checkTypes.nonEmptyObject(dms) === false) {
-            throw new Error('dms must be an non-empty object');
-        }
+    dmsToDecimal(dms: DmsCoordinate): number {
+        validateSchema(dms, DmsCoordinateSchema, { assert: true, name: 'dms' });
 
         const { degrees, minutes, seconds, direction } = dms;
-
-        if (checkTypes.number(degrees) === false) {
-            throw new Error('degrees must be a number');
-        }
-        if (checkTypes.number(minutes) === false) {
-            throw new Error('minutes must be a number');
-        }
-        if (checkTypes.number(seconds) === false) {
-            throw new Error('seconds must be a number');
-        }
-        if (checkTypes.nonEmptyString(direction) === false) {
-            throw new Error('direction must be a non-empty string');
-        }
 
         // Calculate the decimal value
         let decimal =
@@ -123,11 +112,9 @@ export class BaseFormat {
 
     /**
      * Resets the parser to its initial state.
-     *
-     * @return {void}
      */
-    reset() {
-        this.latitude = null;
-        this.longitude = null;
+    reset(): void {
+        this.latitude = undefined;
+        this.longitude = undefined;
     }
 }

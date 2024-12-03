@@ -1,4 +1,6 @@
-import checkTypes from 'check-types';
+import { z } from 'zod';
+import type { Coordinate, DmsCoordinate } from '../types.js';
+import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
 const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
@@ -14,27 +16,13 @@ const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
  * 4007.38N 7407.38W
  */
 export class DmsDecimalMinFormat extends BaseFormat {
-    /**
-     * @param {import('../types').openaip.FormatParserOptions} [options]
-     * @param {number} [options.precision] - The number of decimal places to round to. Default is 3.
-     */
-    constructor(options) {
-        super(options);
-    }
+    parse(coordinateString: string): Coordinate {
+        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-    /**
-     * @param {string} coordinateString
-     * @return {import('../types').openaip.CoordinateParser.Coordinate}
-     */
-    parse(coordinateString) {
-        if (checkTypes.nonEmptyString(coordinateString) === false) {
-            throw new Error('coordinateString must be a non-empty string');
-        }
         if (DmsDecimalMinFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         this.enforceNoHyphen(coordinateString);
-
         // use the regex to parse the latitude and longitude
         const match = coordinateString.match(REGEX);
         if (match == null) {
@@ -48,11 +36,8 @@ export class DmsDecimalMinFormat extends BaseFormat {
         // DMS to decimal
         const decimalLat = this.dmsToDecimal(dmsLat);
         const decimalLon = this.dmsToDecimal(dmsLon);
-        // enforce valid latitude
         this.enforceValidLatitude(decimalLat);
-        // enforce valid longitude
         this.enforceValidLongitude(decimalLon);
-
         const lat = decimalLat.toFixed(this.precision);
         const lon = decimalLon.toFixed(this.precision);
 
@@ -68,10 +53,8 @@ export class DmsDecimalMinFormat extends BaseFormat {
      * @param {string} value - The parsed DMS value, e.g. "4007.38N" or "74007.38W"
      * @return {import('../types').openaip.CoordinateParser.DmsCoordinate}
      */
-    toDms(value) {
-        if (checkTypes.nonEmptyString(value) === false) {
-            throw new Error('value must be a non-empty string');
-        }
+    toDms(value: string): DmsCoordinate {
+        validateSchema(value, z.string(), { assert: true, name: 'value' });
 
         const match = value.match(/^(\d{2,3})(\d{2})(\.\d+)?([NSWE])$/);
         if (match) {
@@ -86,11 +69,9 @@ export class DmsDecimalMinFormat extends BaseFormat {
         }
     }
 
-    /**
-     * @param {string} coordinateString
-     * @return {boolean}
-     */
-    static canParse(coordinateString) {
+    static canParse(coordinateString: string): boolean {
+        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
+
         return REGEX.test(coordinateString);
     }
 }

@@ -11,7 +11,17 @@
     ],
     "type": "module",
     "license": "MIT",
-    "main": "index.js",
+    "main": "dist/src/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/src/index.js"
+        },
+        "./*.js": "./dist/src/*.js",
+        "./formats/*.js": "./dist/src/formats/*.js"
+    },
+    "files": [
+        "dist"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/openaip/openaip-coordinate-parser.git"
@@ -24,31 +34,42 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "test": "vitest run",
-        "lint": "eslint -c eslint.config.js .",
+        "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
+        "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
+        "test": "vitest run --coverage",
+        "tsc:run": "tsc --noEmit",
+        "lint": "eslint src --cache",
+        "format": "prettier --write .",
+        "dist:clean": "tsc --build --clean",
+        "dist:build": "tsc --build",
+        "build": "npm run dist:clean && npm run dist:build",
         "run-security-audit": "npm audit --omit=dev",
-        "format": "prettier --plugin-search-dir . --write .",
-        "update-packages": "ncu --target minor --upgrade && npm install && npm audit fix"
+        "update-packages": "ncu --target minor --upgrade && npm install && npm audit fix",
+        "depcheck": "npx depcheck --oneline --skip-missing=true --ignore-patterns=dist,coverage,*.log"
     },
     "dependencies": {
-        "check-types": "^11.2.3",
-        "clean-deep": "^3.4.0"
+        "clean-deep": "^3.4.0",
+        "zod": "^3.23.8"
     },
     "devDependencies": {
-        "app-root-path": "^3.1.0",
-        "@babel/eslint-parser": "^7.25.7",
-        "@babel/preset-env": "^7.25.7",
-        "@eslint/js": "^9.12.0",
-        "@types/check-types": "^11.2.2",
-        "@vitest/coverage-v8": "^2.1.2",
-        "ajv": "^8.17.1",
-        "eslint": "^9.12.0",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-only-warn": "^1.1.0",
-        "nodemon": "^3.1.7",
+        "@eslint/js": "^9.15.0",
+        "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
+        "@types/jsonwebtoken": "^9.0.7",
+        "@types/luxon": "^3.4.2",
+        "@types/node": "^22.10.0",
+        "@vitest/coverage-v8": "^2.1.6",
+        "@vitest/ui": "^2.1.6",
+        "chokidar-cli": "^3.0.0",
+        "depcheck": "^1.4.7",
+        "eslint": "<=9.14.0",
+        "eslint-plugin-security": "^3.0.1",
         "npm-check-updates": "^16.14.20",
-        "prettier": "^3.3.3",
-        "vite": "^5.4.8",
-        "vitest": "^2.1.2"
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.16.0",
+        "vite": "^5.4.11",
+        "vitest": "^2.1.6"
+    },
+    "comments": {
+        "eslint": "TODO Upgrade to ESLint 8.15 when fixed: https://github.com/eslint/eslint/issues/19134"
     }
 }

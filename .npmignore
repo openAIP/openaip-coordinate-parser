@@ -1,0 +1,15 @@
+.vscode/
+coverage/
+tests/
+.github/
+node_modules/
+.tools-versions
+.redeploy_commit.sh
+vite.config.js
+tsconfig.json
+.npmrc
+.npmignore
+.gitignore
+.gitattributes
+buildcache
+tsconfig.tsbuildinfo
