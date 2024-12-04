@@ -21,10 +21,11 @@
         "verbatimModuleSyntax": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "lib": [
             "es2023"
         ],
-        "module": "node16",
+        "module": "Node16",
         "target": "es2022",
         "moduleResolution": "node16"
     }
