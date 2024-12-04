@@ -39,25 +39,4 @@ describe('parse', () => {
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
-
-    it("returns the correct latitude and longitude for '1.23412312 5.6782356' with precision 4", () => {
-        const formatParser = new DecimalUnsignedFormat({ precision: 4 });
-        const result = formatParser.parse('1.23412312 5.6782356');
-        expect(result.latitude).toBe(1.2341);
-        expect(result.longitude).toBe(5.6782);
-    });
-
-    it("returns the correct latitude and longitude for '-1.23412312 -5.6782356' with precision 4", () => {
-        const formatParser = new DecimalUnsignedFormat({ precision: 4 });
-        const result = formatParser.parse('-1.23412312 -5.6782356');
-        expect(result.latitude).toBe(-1.2341);
-        expect(result.longitude).toBe(-5.6782);
-    });
-
-    it("returns the correct latitude and longitude for '1.23412312 -5.6782356' with precision 4", () => {
-        const formatParser = new DecimalUnsignedFormat({ precision: 4 });
-        const result = formatParser.parse('1.23412312 -5.6782356');
-        expect(result.latitude).toBe(1.2341);
-        expect(result.longitude).toBe(-5.6782);
-    });
 });

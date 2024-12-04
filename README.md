@@ -84,29 +84,29 @@ const parser = new Parser({ formatParsers: [customFormatParser, decimalParser] }
 
 ### Supported Formats
 
-Currently the out-of-the-box format parsers support the following formats and to a degree their respective variants with or without whitespaces:
+Currently the out-of-the-box format parsers supports various formats and handles their various variations ,e.g. with or without whitespaces, gracefully:
 
--   `10, 12`
--   `1.234, 5.678`
--   `1.234,5.678`
--   `1.234 5.678`
--   `12N,56E`
--   `12.234 N 56.678 E`
--   `12.234 N, 56.678 E`
--   `12.234N,56.678E`
--   `12.234N56.678E`
+-   `1° 5°`
 -   `1.234° 5.678°`
 -   `1.234°, 5.678°`
--   `1.234°,5.678°`
+-   `N 12° E 5°`
+-   `N 1.234° E 5.678°`
+-   `N 1.234°, E5.678°`
+-   `1° N 5° E`
 -   `1.234° N 5.678° E`
 -   `1.234° N, 5.678° E`
--   `1.234°N,5.678°E`
--   `1.234°N5.678°E`
--   `4007N 7407W`
--   `4007.38N7407.38W`
+-   `10, 12`
+-   `1.234, 5.678`
+-   `N 12, E 56`
+-   `N 12.234 E 56.678`
+-   `N 12.234, E 56.678`
+-   `12 N, 56 E`
+-   `12.234 N 56.678 E`
+-   `12.234 N, 56.678 E`
+-   `N 4007 W 7407`
+-   `N 4007.38 W 7407.38`
+-   `4007 N 7407 W`
 -   `4007.38 N 7407.38 W`
--   `4007.38N 7407.38W`
--   ``
 -   ``
 -   ``
 -   ``

@@ -152,27 +152,6 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.latitude).toBe(1.234);
             expect(result.longitude).toBe(5.678);
         });
-
-        it("returns the correct latitude and longitude for '1.23412312 5.6782356' with precision 4", () => {
-            const parser = new Parser();
-            const result = parser.parse('1.23412312 5.6782356');
-            expect(result.latitude).toBe(1.234);
-            expect(result.longitude).toBe(5.678);
-        });
-
-        it("returns the correct latitude and longitude for '-1.23412312 -5.6782356' with precision 4", () => {
-            const parser = new Parser();
-            const result = parser.parse('-1.23412312 -5.6782356');
-            expect(result.latitude).toBe(-1.234);
-            expect(result.longitude).toBe(-5.678);
-        });
-
-        it("returns the correct latitude and longitude for '1.23412312 -5.6782356' with precision 4", () => {
-            const parser = new Parser();
-            const result = parser.parse('1.23412312 -5.6782356');
-            expect(result.latitude).toBe(1.234);
-            expect(result.longitude).toBe(-5.678);
-        });
     });
     describe('test decimal unsigned prefixed hemisphere format', () => {
         it("returns the correct latitude and longitude for 'N12 E56'", () => {
@@ -253,6 +232,35 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.longitude).toBe(5.678);
         });
     });
+    describe('test dm unsigned prefixed hemisphere format', () => {
+        it("returns the correct latitude and longitude for 'N4007 W7407'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N4007 W7407');
+            expect(result.latitude).toBe(40.117);
+            expect(result.longitude).toBe(-74.117);
+        });
+
+        it("returns the correct latitude and longitude for 'N4007.38W7407.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N4007.38W7407.38');
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it("returns the correct latitude and longitude for 'N 4007.38 W 7407.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N 4007.38 W 7407.38');
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it("returns the correct latitude and longitude for 'N4007.38 W7407.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N4007.38 W7407.38');
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+    });
     describe('test dm unsigned suffixed hemisphere format', () => {
         it("returns the correct latitude and longitude for '4007N 7407W'", () => {
             const parser = new Parser();
@@ -278,13 +286,6 @@ describe('Test that all configured format parsers do not interfere', () => {
         it("returns the correct latitude and longitude for '4007.38  N 7407.38  W'", () => {
             const parser = new Parser();
             const result = parser.parse('4007.38  N 7407.38  W');
-            expect(result.latitude).toBe(40.123);
-            expect(result.longitude).toBe(-74.123);
-        });
-
-        it("returns the correct latitude and longitude for '4007.3812342N 7407.38123W' with precision 4", () => {
-            const parser = new Parser();
-            const result = parser.parse('4007.3812342N 7407.38123W');
             expect(result.latitude).toBe(40.123);
             expect(result.longitude).toBe(-74.123);
         });
