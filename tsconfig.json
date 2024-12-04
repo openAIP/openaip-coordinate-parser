@@ -2,31 +2,23 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "include": [
         "src/**/*",
-        "tests/**/*",
     ],
     "compilerOptions": {
-        "outDir": "dist",
-        "rootDir": ".",
-        "allowJs": false,
-        "declaration": true,
-        "emitDeclarationOnly": false,
-        "declarationMap": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "useUnknownInCatchVariables": false,
-        "noImplicitAny": false,
-        "noUnusedParameters": false,
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "verbatimModuleSyntax": true,
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
         "lib": [
-            "es2023"
+            "esnext"
         ],
-        "module": "commonjs",
-        "target": "es2022",
-        "moduleResolution": "node16"
-    }
+        "declaration": true,
+        "declarationDir": "./dist/types",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "rootDir": "."
+    },
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
 }

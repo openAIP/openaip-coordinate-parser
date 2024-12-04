@@ -20,18 +20,19 @@
         }
     ],
     "type": "module",
-    "license": "MIT",
-    "main": "dist/src/index.js",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.mjs",
+    "types": "./dist/types/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/src/index.js"
-        },
-        "./*.js": "./dist/src/*.js",
-        "./formats/*.js": "./dist/src/formats/*.js"
+            "require": "./dist/cjs/index.js",
+            "import": "./dist/esm/index.mjs"
+        }
     },
     "files": [
         "dist"
     ],
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/openaip/openaip-coordinate-parser.git"
@@ -44,15 +45,18 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:esm": "tsc -p tsconfig.esm.json && npm run rename:esm",
+        "build": "npm run clean && npm run build:cjs && npm run build:esm",
+        "clean": "rimraf dist",
+        "rename:esm": "/bin/zsh ./scripts/fix-mjs.sh",
+        "prepack": "npm run clean && npm run build",
         "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
         "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
         "test": "vitest run --coverage",
         "tsc:run": "tsc --noEmit",
         "lint": "eslint src --cache",
         "format": "prettier --write .",
-        "dist:clean": "tsc --build --clean",
-        "dist:build": "tsc --build",
-        "build": "npm run dist:clean && npm run dist:build",
         "run-security-audit": "npm audit --omit=dev",
         "update-packages": "ncu --target minor --upgrade && npm install && npm audit fix",
         "depcheck": "npx depcheck --oneline --skip-missing=true --ignore-patterns=dist,coverage,*.log"
@@ -74,6 +78,7 @@
         "eslint": "<=9.14.0",
         "eslint-plugin-security": "^3.0.1",
         "npm-check-updates": "^16.14.20",
+        "rimraf": "^6.0.1",
         "typescript": "^5.7.2",
         "typescript-eslint": "^8.17.0",
         "vite": "^5.4.11",
