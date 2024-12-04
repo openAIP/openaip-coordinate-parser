@@ -44,7 +44,7 @@ export class BaseFormat implements IFormatParser {
      * number and within the range of -180 to 180. If the value is not valid, the method throws an
      * error.
      */
-    enforceValidLongitude(lonValue) {
+    enforceValidLongitude(lonValue: any): void {
         if (isNumeric(lonValue) === false) {
             throw new Error('longitude must be numeric');
         }
@@ -54,11 +54,63 @@ export class BaseFormat implements IFormatParser {
         }
     }
 
+    enforceValidLatitudeDegrees(degrees: any, signed = true): void {
+        if (isNumeric(degrees) === false) {
+            throw new Error('degrees must be numeric');
+        }
+        const deg = Number.parseFloat(degrees.toString());
+        if (signed) {
+            if (deg < -90 || deg > 90) {
+                throw new Error('latitude degrees must be within the range of -90 to 90');
+            }
+        } else {
+            if (deg < 0 || deg > 90) {
+                throw new Error('latitude degrees must be within the range of 0 to 90');
+            }
+        }
+    }
+
+    enforceValidLongitudeDegrees(degrees: any, signed = true): void {
+        if (isNumeric(degrees) === false) {
+            throw new Error('degrees must be numeric');
+        }
+        const deg = Number.parseFloat(degrees.toString());
+        if (signed) {
+            if (deg < -180 || deg > 180) {
+                throw new Error('longitude degrees must be within the range of -180 to 180');
+            }
+        } else {
+            if (deg < 0 || deg > 180) {
+                throw new Error('longitude degrees must be within the range of 0 to 180');
+            }
+        }
+    }
+
+    enforceValidMinutes(minutes: any): void {
+        if (isNumeric(minutes) === false) {
+            throw new Error('minutes must be numeric');
+        }
+        const min = Number.parseFloat((minutes as any).toString());
+        if (min < 0 || min >= 60) {
+            throw new Error('minutes must be within the range of 0 to 59');
+        }
+    }
+
+    enforceValidSeconds(seconds: any): void {
+        if (isNumeric(seconds) === false) {
+            throw new Error('seconds must be numeric');
+        }
+        const sec = Number.parseFloat(seconds.toString());
+        if (sec < 0 || sec >= 60) {
+            throw new Error('seconds must be within the range of 0 to 59');
+        }
+    }
+
     /**
      * Enforces that a given input string is a valid latitude value. This means that the value is a
      * number and within the range of -90 to 90. If the value is not valid, the method throws an
      */
-    enforceValidLatitude(latValue) {
+    enforceValidLatitude(latValue: any): void {
         if (isNumeric(latValue) === false) {
             throw new Error('latitude must be numeric');
         }
@@ -72,7 +124,7 @@ export class BaseFormat implements IFormatParser {
      * Enforces that a given input string does not contain a hyphen. If the value contains a hyphen,
      * the method throws an error.
      */
-    enforceNoHyphen(coordinateString: string): void {
+    enforceNoHyphen(coordinateString: any): void {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
         if (coordinateString.includes('-')) {
@@ -90,9 +142,9 @@ export class BaseFormat implements IFormatParser {
 
         // Calculate the decimal value
         let decimal =
-            parseInt(degrees.toString()) +
-            parseFloat(minutes.toString()) / 60 +
-            (seconds ? parseFloat(seconds.toString()) / 3600 : 0);
+            Number.parseInt(degrees.toString()) +
+            Number.parseFloat(minutes.toString()) / 60 +
+            Number.parseFloat(seconds.toString()) / 3600;
 
         // Adjust for direction (North/East = positive, South/West = negative)
         if (direction === 'S' || direction === 'W') {
