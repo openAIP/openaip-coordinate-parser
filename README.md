@@ -84,7 +84,7 @@ const parser = new Parser({ formatParsers: [customFormatParser, decimalParser] }
 
 ### Supported Formats
 
-Currently the out-of-the-box format parsers supports various formats and handles their various variations ,e.g. with or without whitespaces, gracefully:
+Currently the out-of-the-box format parsers supports various formats and handles their various variations, i.e. with or without whitespaces and comma, gracefully:
 
 -   `1° 5°`
 -   `1.234° 5.678°`
@@ -107,6 +107,12 @@ Currently the out-of-the-box format parsers supports various formats and handles
 -   `N 4007.38 W 7407.38`
 -   `4007 N 7407 W`
 -   `4007.38 N 7407.38 W`
+-   `40°7'23" -74°7'23"`
+-   `40°7'23", -74°7'23"`
+-   `40°7'23.123", -74°7'23.123"`
+-   ``
+-   ``
+-   ``
 -   ``
 -   ``
 -   ``
