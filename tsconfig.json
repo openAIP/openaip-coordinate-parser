@@ -1,11 +1,12 @@
 {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "_version": "22.0.0",
     "compilerOptions": {
         // "lib": [
         //     "esnext"
         // ],
         "declaration": true,
         "declarationDir": "./dist/types",
-        "moduleResolution": "node",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -13,7 +14,9 @@
         "baseUrl": ".",
         "rootDir": "./src",
         "outDir": "dist/esm",
-        "target": "ES2021"
+        "target": "ES2023",
+        "moduleResolution": "node16",
+        "module": "node16",
     },
     "include": [
         "src"
