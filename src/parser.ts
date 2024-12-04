@@ -8,6 +8,7 @@ import { DecimalUnsignedPrefixedHemisphereFormat } from './formats/decimal-unsig
 import { DecimalUnsignedSuffixedHemisphereFormat } from './formats/decimal-unsigned-suffixed-hemisphere-format.js';
 import { DmUnsignedPrefixedHemisphereFormat } from './formats/dm-unsigned-prefixed-hemisphere-format.js';
 import { DmUnsignedSuffixedHemisphereFormat } from './formats/dm-unsigned-suffixed-hemisphere-format.js';
+import { DmsBlockPrefixedHemisphereFormat } from './formats/dms-block-prefixed-hemisphere-format.js';
 import { DmsSignedFormat } from './formats/dms-signed-format.js';
 import { DmsSignedPrefixedHemisphereFormat } from './formats/dms-signed-prefixed-hemisphere-format.js';
 import { DmsSignedSuffixedHemisphereFormat } from './formats/dms-signed-suffixed-hemisphere-format.js';
@@ -59,6 +60,7 @@ export class Parser {
             new DecimalSignedSuffixedHemisphereFormat({ precision: precision }),
             new DmUnsignedPrefixedHemisphereFormat({ precision: precision }),
             new DmUnsignedSuffixedHemisphereFormat({ precision: precision }),
+            new DmsBlockPrefixedHemisphereFormat({ precision: precision }),
             new DmsSignedFormat({ precision: precision }),
             new DmsSignedPrefixedHemisphereFormat({ precision: precision }),
             new DmsSignedSuffixedHemisphereFormat({ precision: precision }),

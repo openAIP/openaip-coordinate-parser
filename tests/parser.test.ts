@@ -290,6 +290,35 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.longitude).toBe(-74.123);
         });
     });
+    describe('test dms block prefixed hemisphere format', () => {
+        it(`returns the correct latitude and longitude for N400723 W0740723`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`N400723 W0740723`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for N400723W0740723`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`N400723W0740723`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for N400723, W0740723`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`N400723, W0740723`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for N400723.999, W0740723.999`, () => {
+            const parser = new Parser({ precision: 5 });
+            const result = parser.parse(`N400723.999, W0740723.999`);
+            expect(result.latitude).toBe(40.12333);
+            expect(result.longitude).toBe(-74.12333);
+        });
+    });
     describe('test dsm signed format', () => {
         it(`returns the correct latitude and longitude for 40°7'23" -74°7'23"`, () => {
             const parser = new Parser();

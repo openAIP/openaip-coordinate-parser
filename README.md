@@ -130,8 +130,8 @@ Currently the out-of-the-box format parsers supports the following various forma
 -   `N40:7:23 W74:7:23`
 -   `N40:7:23, W74:7:23`
 -   `N 40:7:23.123 W 74:7:23.123`
--   ``
--   ``
--   ``
+-   `N044506 E1030342`
+-   `N044506E1030342`
+-   `N044506.123 E1030342.123`
 -   ``
 -   ``
