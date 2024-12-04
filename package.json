@@ -1,6 +1,6 @@
 {
     "name": "@openaip/openaip-coordinate-parser",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Parser that extracts coordinates from a variety of formatted lat/lon strings.",
     "authors": [
         {
