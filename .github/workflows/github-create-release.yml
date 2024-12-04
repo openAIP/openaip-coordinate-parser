@@ -29,8 +29,8 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 22
-                  registry-url: https://npm.pkg.github.com/
-                  scope: "@openaip"
+                  registry-url: https://registry.npmjs.org
+                  scope: '@openaip'
             - run: npm install
               env:
                   NODE_AUTH_TOKEN: ${{secrets.GHPR_NPM_TOKEN}}
