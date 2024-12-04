@@ -1,17 +1,19 @@
 {
     "compilerOptions": {
-        "lib": [
-            "esnext"
-        ],
+        // "lib": [
+        //     "esnext"
+        // ],
         "declaration": true,
         "declarationDir": "./dist/types",
+        "moduleResolution": "node",
         "strict": true,
-        // "esModuleInterop": true,
+        "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node",
         "baseUrl": ".",
-        "rootDir": "./src"
+        "rootDir": "./src",
+        "outDir": "dist/esm",
+        "target": "ES2021"
     },
     "include": [
         "src"
