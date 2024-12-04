@@ -6,7 +6,7 @@ import { BaseFormat } from './base-format.js';
 const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
 
 /**
- * Parses coordinates strings in DMS format with decimal minutes.
+ * Parses coordinates strings in DM format with decimal minutes.
  *
  * Supported formats:
  *
@@ -15,11 +15,11 @@ const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
  * 4007.38 N 7407.38 W
  * 4007.38N 7407.38W
  */
-export class DmsDecimalMinFormat extends BaseFormat {
+export class DmHemiFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-        if (DmsDecimalMinFormat.canParse(coordinateString) === false) {
+        if (DmHemiFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         this.enforceNoHyphen(coordinateString);

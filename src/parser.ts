@@ -4,7 +4,7 @@ import { DecimalFormat } from './formats/decimal-format.js';
 import { DecimalHemiFormat } from './formats/decimal-hemi-format.js';
 import { DecimalSignedFormat } from './formats/decimal-signed-format.js';
 import { DecimalSexaHemiFormat } from './formats/decimal-signed-hemi-format.js';
-import { DmsDecimalMinFormat } from './formats/dms-decimal-min-format.js';
+import { DmHemiFormat } from './formats/dm-hemi-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
 
@@ -47,7 +47,7 @@ export class Parser {
             new DecimalHemiFormat({ precision: precision }),
             new DecimalSignedFormat({ precision: precision }),
             new DecimalSexaHemiFormat({ precision: precision }),
-            new DmsDecimalMinFormat({ precision: precision }),
+            new DmHemiFormat({ precision: precision }),
         ];
         let formatParsers = options?.formatParsers || defaultParsers;
         if (formatParsers.length > 0 && extendFormatParsers === true) {
