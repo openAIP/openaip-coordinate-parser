@@ -3,7 +3,7 @@ import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^([NS])(\d{2})(\d{2})(\d{2}(\.\d+)?)\s*,?\s*([EW])(\d{3})(\d{2})(\d{2}(\.\d+)?)$/;
+const REGEX = /^(\d{2})(\d{2})(\d{2}(\.\d+)?)\s*([NS])\s*,?\s*(\d{3})(\d{2})(\d{2}(\.\d+)?)\s*([EW])$/;
 
 /**
  * Parses coordinates strings in DMS block prefixed hemisphere format. Coordinate ordering is
@@ -11,15 +11,15 @@ const REGEX = /^([NS])(\d{2})(\d{2})(\d{2}(\.\d+)?)\s*,?\s*([EW])(\d{3})(\d{2})(
  *
  * Supported formats:
  *
- * N044506 E1030342
- * N044506E1030342
- * N044506.123 E1030342.123
+ * 044506N 1030342E
+ * 044506N1030342E
+ * 044506.123N 1030342.123E
  */
-export class DmsBlockPrefixedHemisphereFormat extends BaseFormat {
+export class DmsBlockSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-        if (DmsBlockPrefixedHemisphereFormat.canParse(coordinateString) === false) {
+        if (DmsBlockSuffixedHemisphereFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         // use the regex to parse the latitude and longitude
@@ -27,14 +27,14 @@ export class DmsBlockPrefixedHemisphereFormat extends BaseFormat {
         if (match == null) {
             throw new Error('Invalid coordinate string');
         }
-        const matchLatDegree = match[2];
-        const matchLatMinutes = match[3];
-        const matchLatSeconds = match[4];
-        const matchLatDirection = match[1];
-        const matchLonDegree = match[7];
-        const matchLonMinutes = match[8];
-        const matchLonSeconds = match[9];
-        const matchLonDirection = match[6];
+        const matchLatDegree = match[1];
+        const matchLatMinutes = match[2];
+        const matchLatSeconds = match[3];
+        const matchLatDirection = match[5];
+        const matchLonDegree = match[6];
+        const matchLonMinutes = match[7];
+        const matchLonSeconds = match[8];
+        const matchLonDirection = match[10];
 
         this.enforceValidLatitudeDegrees(matchLatDegree);
         this.enforceValidMinutes(matchLatMinutes);

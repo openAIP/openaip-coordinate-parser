@@ -3,7 +3,7 @@ import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(-?\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\",?\s*(-?\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"$/;
+const REGEX = /^(-?\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"\s*,?\s*(-?\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"$/;
 
 /**
  * Parses coordinates strings in DMS signed format. Coordinate ordering is

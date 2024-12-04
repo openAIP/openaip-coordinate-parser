@@ -1,6 +1,7 @@
 # OpenAIP Coordinate Parser
 
-Easily extendable and configurable parser for NodeJS and the browser that extracts coordinates from a variety of formatted lat/lon strings. The main focus is parsing various decimal or DMS format variations. Contributions that
+Easily extendable and configurable parser for NodeJS and the browser that extracts coordinates from a variety
+of formatted lat/lon strings. The main focus is parsing various decimal or DMS format variations. Contributions that
 add other format parsers are always welcome!
 
 ### Usage
@@ -133,5 +134,6 @@ Currently the out-of-the-box format parsers supports the following various forma
 -   `N044506 E1030342`
 -   `N044506E1030342`
 -   `N044506.123 E1030342.123`
--   ``
--   ``
+-   `044506N 1030342E`
+-   `044506N1030342E`
+-   `044506.123N 1030342.123E`
