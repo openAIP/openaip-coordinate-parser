@@ -15,7 +15,6 @@ jobs:
                   node-version: 22
                   registry-url: https://npm.pkg.github.com/
                   scope: "@openaip"
-            # IMPORTANT use "npm install" to also include dev-dependencies which are required for running tests
             - run: npm install
               name: Install packages
               env:
@@ -26,14 +25,12 @@ jobs:
         needs: run-tests
         runs-on: ubuntu-22.04
         steps:
-            # IMPORTANT initiates another checkout which essentially resets the working directory
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v3
               with:
                   node-version: 22
                   registry-url: https://npm.pkg.github.com/
                   scope: "@openaip"
-            # IMPORTANT building requires dev-dependencies to be installed
             - run: npm install
               env:
                   NODE_AUTH_TOKEN: ${{secrets.GHPR_NPM_TOKEN}}
