@@ -2,23 +2,14 @@ import { describe, expect, it } from 'vitest';
 import { DmUnsignedSuffixedHemisphereFormat } from '../src/formats/dm-unsigned-suffixed-hemisphere-format.js';
 
 describe('canParse', () => {
-    it('returns true for valid decimal format', () => {
+    it('returns true for known formats', () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N7407.38W')).toBe(true);
-    });
-
-    it("returns true for valid decimal format '4007.38N 7407.38W' with space", () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N 7407.38W')).toBe(true);
     });
 
-    it("returns false for invalid decimal format '4007.38N740738W'", () => {
+    it('returns false for unknown formats', () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N740738W')).toBe(false);
-    });
-
-    it("returns false for invalid decimal format '4007.38N7407.38P'", () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N7407.38P')).toBe(false);
-    });
-
-    it("returns false for invalid decimal format '4007.38N7407.38 '", () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N7407.38 ')).toBe(false);
     });
 });

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { IFormatParser } from './formats/base-format.js';
 import { DecimalSignedFormat } from './formats/decimal-signed-format.js';
+import { DecimalSignedPrefixedHemisphereFormat } from './formats/decimal-signed-prefixed-hemisphere-format.js';
 import { DecimalSignedSuffixedHemisphereFormat } from './formats/decimal-signed-suffixed-hemisphere-format.js';
 import { DecimalUnsignedFormat } from './formats/decimal-unsigned-format.js';
 import { DecimalUnsignedSuffixedHemisphereFormat } from './formats/decimal-unsigned-suffixed-hemisphere-format.js';
@@ -26,14 +27,12 @@ export type Options = {
 };
 
 export class Parser {
-    originalString: string;
     opts: Options;
     latitude: number | undefined;
     longitude: number | undefined;
     parsers: IFormatParser[];
 
-    constructor(coordinateString: string, options?: Options) {
-        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
+    constructor(options?: Options) {
         validateSchema(options, OptionsSchema, { assert: true, name: 'options' });
 
         const defaultOptions = {
@@ -44,6 +43,7 @@ export class Parser {
         // set default format parsers to use if not provided
         const defaultParsers = [
             new DecimalUnsignedFormat({ precision: precision }),
+            new DecimalSignedPrefixedHemisphereFormat({ precision: precision }),
             new DecimalUnsignedSuffixedHemisphereFormat({ precision: precision }),
             new DecimalSignedFormat({ precision: precision }),
             new DecimalSignedSuffixedHemisphereFormat({ precision: precision }),
@@ -53,19 +53,10 @@ export class Parser {
         if (formatParsers.length > 0 && extendFormatParsers === true) {
             formatParsers = [...defaultParsers, ...formatParsers];
         }
-        this.originalString = coordinateString;
         this.opts = { precision: precision };
         this.latitude = undefined;
         this.longitude = undefined;
         this.parsers = formatParsers;
-
-        try {
-            const { longitude, latitude } = this.parse(coordinateString);
-            this.longitude = longitude;
-            this.latitude = latitude;
-        } catch (err) {
-            throw new Error(`Coordinate string "${coordinateString}" could not be parsed: ${err.message}`);
-        }
     }
 
     parse(coordinateString: string): Coordinate {

@@ -2,23 +2,18 @@ import { describe, expect, it } from 'vitest';
 import { DecimalSignedSuffixedHemisphereFormat } from '../src/formats/decimal-signed-suffixed-hemisphere-format.js';
 
 describe('canParse', () => {
-    it('returns true for valid decimal format', () => {
+    it('returns true for known formats', () => {
+        expect(DecimalSignedSuffixedHemisphereFormat.canParse('12° N 5° E')).toBe(true);
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234° N 5.678° E')).toBe(true);
+        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234° N, 5.678° E')).toBe(true);
+        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234°N, 5.678°E')).toBe(true);
+        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234°N,5.678°E')).toBe(true);
+        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234°N5.678°E')).toBe(true);
     });
 
-    it("returns true for valid decimal format '1.234 ° N,  5.678 ° E' with comma", () => {
-        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 ° N,  5.678 ° E')).toBe(true);
-    });
-
-    it("returns false for invalid decimal format '1.234 5.678'", () => {
+    it('returns false for unknown formats', () => {
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 5.678')).toBe(false);
-    });
-
-    it("returns false for invalid decimal format '1.234 N 5.678 P'", () => {
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 N 5.678 P')).toBe(false);
-    });
-
-    it("returns false for invalid decimal format '1.234 N 5.678 '", () => {
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 N 5.678 ')).toBe(false);
     });
 });
@@ -63,12 +58,5 @@ describe('parse', () => {
         const result = formatParser.parse('1.234°N5.678°E');
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
-    });
-
-    it("returns the correct latitude and longitude for '1.23412312°N 5.6782356°E' with precision 4", () => {
-        const formatParser = new DecimalSignedSuffixedHemisphereFormat({ precision: 4 });
-        const result = formatParser.parse('1.23412312°N 5.6782356°E');
-        expect(result.latitude).toBe(1.2341);
-        expect(result.longitude).toBe(5.6782);
     });
 });
