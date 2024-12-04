@@ -12,6 +12,7 @@ import { DmsSignedFormat } from './formats/dms-signed-format.js';
 import { DmsSignedPrefixedHemisphereFormat } from './formats/dms-signed-prefixed-hemisphere-format.js';
 import { DmsSignedSuffixedHemisphereFormat } from './formats/dms-signed-suffixed-hemisphere-format.js';
 import { DmsUnsignedDelimitedFormat } from './formats/dms-unsigned-delimited-format.js';
+import { DmsUnsignedDelimitedPrefixedHemisphere } from './formats/dms-unsigned-delimited-prefixed-hemisphere-format.js';
 import { DmsUnsignedDelimitedSuffixedHemisphereFormat } from './formats/dms-unsigned-delimited-suffixed-hemisphere-format.js';
 import { DmsUnsignedFormat } from './formats/dms-unsigned-format.js';
 import type { Coordinate } from './types.js';
@@ -62,6 +63,7 @@ export class Parser {
             new DmsSignedPrefixedHemisphereFormat({ precision: precision }),
             new DmsSignedSuffixedHemisphereFormat({ precision: precision }),
             new DmsUnsignedDelimitedFormat({ precision: precision }),
+            new DmsUnsignedDelimitedPrefixedHemisphere({ precision: precision }),
             new DmsUnsignedDelimitedSuffixedHemisphereFormat({ precision: precision }),
             new DmsUnsignedFormat({ precision: precision }),
         ];

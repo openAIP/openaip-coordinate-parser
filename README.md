@@ -128,6 +128,12 @@ Currently the out-of-the-box format parsers supports various formats and handles
 -   `40:7:23N, 74:7:23W`
 -   `40:7:23N74:7:23W`
 -   `40:7:23.123N 74:7:23.123W`
+-   `N40:7:23 W74:7:23`
+-   `N40:7:23, W74:7:23`
+-   `N40:7:23W74:7:23`
+-   `N 40:7:23.123 W 74:7:23.123`
+-   ``
+-   ``
 -   ``
 -   ``
 -   ``
