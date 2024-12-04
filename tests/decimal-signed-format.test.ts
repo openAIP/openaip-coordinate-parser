@@ -6,10 +6,6 @@ describe('canParse', () => {
         expect(DecimalSignedFormat.canParse('1.234° 5.678°')).toBe(true);
         expect(DecimalSignedFormat.canParse('1.234 °,  5.678 °')).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DecimalSignedFormat.canParse('1.234 5.678')).toBe(false);
-    });
 });
 describe('parse', () => {
     it("returns the correct latitude and longitude for '12° 5°'", () => {

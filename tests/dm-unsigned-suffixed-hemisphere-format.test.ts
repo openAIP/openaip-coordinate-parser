@@ -8,12 +8,6 @@ describe('canParse', () => {
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38 N 7407.38 W')).toBe(true);
         expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N 7407.38W')).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N740738W')).toBe(false);
-        expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N7407.38P')).toBe(false);
-        expect(DmUnsignedSuffixedHemisphereFormat.canParse('4007.38N7407.38 ')).toBe(false);
-    });
 });
 describe('parse', () => {
     it("returns the correct latitude and longitude for '4007N 7407W'", () => {

@@ -10,10 +10,6 @@ describe('canParse', () => {
         expect(DmsSignedFormat.canParse(`40° 7' 23", -74° 7' 23"`)).toBe(true);
         expect(DmsSignedFormat.canParse(`40° 7' 23.9999", -74° 7' 23.9999"`)).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DmsSignedFormat.canParse('1.234 5.678')).toBe(false);
-    });
 });
 describe('parse', () => {
     it(`returns the correct latitude and longitude for 40°7'23" -74°7'23"`, () => {

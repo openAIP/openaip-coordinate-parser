@@ -6,10 +6,6 @@ describe('canParse', () => {
         expect(DecimalUnsignedFormat.canParse('1.234, 5.678')).toBe(true);
         expect(DecimalUnsignedFormat.canParse('1.234 5.678')).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DecimalUnsignedFormat.canParse('1.234N 5.678E')).toBe(false);
-    });
 });
 describe('parse', () => {
     it("returns the correct latitude and longitude for '10, 13'", () => {

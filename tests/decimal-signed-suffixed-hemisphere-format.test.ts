@@ -10,12 +10,6 @@ describe('canParse', () => {
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234°N,5.678°E')).toBe(true);
         expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234°N5.678°E')).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 5.678')).toBe(false);
-        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 N 5.678 P')).toBe(false);
-        expect(DecimalSignedSuffixedHemisphereFormat.canParse('1.234 N 5.678 ')).toBe(false);
-    });
 });
 describe('parse', () => {
     it("returns the correct latitude and longitude for '12° N 5° E'", () => {

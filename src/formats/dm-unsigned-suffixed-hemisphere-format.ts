@@ -49,9 +49,6 @@ export class DmUnsignedSuffixedHemisphereFormat extends BaseFormat {
 
     /**
      * Converts a DMS notation coordinate like "4007.38N" to DMS parts.
-     *
-     * @param {string} value - The parsed DMS value, e.g. "4007.38N" or "74007.38W"
-     * @return {import('../types').openaip.CoordinateParser.DmsCoordinate}
      */
     toDms(value: string): DmsCoordinate {
         validateSchema(value, z.string(), { assert: true, name: 'value' });

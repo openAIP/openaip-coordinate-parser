@@ -1,6 +1,7 @@
 # OpenAIP Coordinate Parser
 
-Easily extendable and configurable parser for NodeJS and the browser that extracts coordinates from a variety of formatted lat/lon strings.
+Easily extendable and configurable parser for NodeJS and the browser that extracts coordinates from a variety of formatted lat/lon strings. The main focus is parsing various decimal or DMS format variations. Contributions that
+add other format parsers are always welcome!
 
 ### Usage
 
@@ -113,7 +114,11 @@ Currently the out-of-the-box format parsers supports various formats and handles
 -   `40 7 23 -74 7 23`
 -   `40 7 23, -74 7 23`
 -   `40 7 23.123, -74 7 23.123`
--   ``
--   ``
--   ``
+-   `40°7'23"N 74°7'23"W`
+-   `40°7'23"N, 74°7'23"W`
+-   `40°7'23.123"N 74°7'23.123"W`
+-   `N40°7'23" W74°7'23"`
+-   `N40°7'23", W74°7'23"`
+-   `N40°7'23"W74°7'23"`
+-   `N 40°7'23.123" W 74°7'23.123"`
 -   ``

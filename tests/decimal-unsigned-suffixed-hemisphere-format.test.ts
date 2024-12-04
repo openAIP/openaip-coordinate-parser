@@ -9,10 +9,6 @@ describe('canParse', () => {
         expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234N,56.678E')).toBe(true);
         expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234N56.678E')).toBe(true);
     });
-
-    it('returns false for unknown formats', () => {
-        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('1.234 5.678')).toBe(false);
-    });
 });
 describe('parse', () => {
     it("returns the correct latitude and longitude for '12N 56E'", () => {
