@@ -3,8 +3,11 @@ import { DecimalUnsignedSuffixedHemisphereFormat } from '../src/formats/decimal-
 
 describe('canParse', () => {
     it('returns true for known formats', () => {
-        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('1.234N 5.678E')).toBe(true);
-        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('1.234 N,  5.678 E')).toBe(true);
+        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12N,56E')).toBe(true);
+        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234 N 56.678 E')).toBe(true);
+        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234 N, 56.678 E')).toBe(true);
+        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234N,56.678E')).toBe(true);
+        expect(DecimalUnsignedSuffixedHemisphereFormat.canParse('12.234N56.678E')).toBe(true);
     });
 
     it('returns false for unknown formats', () => {
