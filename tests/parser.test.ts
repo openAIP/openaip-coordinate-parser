@@ -436,7 +436,69 @@ describe('Test that all configured format parsers do not interfere', () => {
         });
     });
     describe('test dms unsigned delimited format', () => {
+        it(`returns the correct latitude and longitude for 40:7:23 -74:7:23`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23 -74:7:23`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
 
+        it(`returns the correct latitude and longitude for 40:7:23, -74:7:23`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23, -74:7:23`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23,-74:7:23`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23,-74:7:23`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23.9999", -74:7:23.9999`, () => {
+            const parser = new Parser({ precision: 5 });
+            const result = parser.parse(`40:7:23.9999, -74:7:23.9999`);
+            expect(result.latitude).toBe(40.12333);
+            expect(result.longitude).toBe(-74.12333);
+        });
+    });
+    describe('test dms unsigned delimited suffixed hemisphere format', () => {
+        it(`returns the correct latitude and longitude for 40:7:23N 74:7:23W`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23N 74:7:23W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23N74:7:23W`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23N74:7:23W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23N, 74:7:23W`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23N, 74:7:23W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23N,74:7:23W`, () => {
+            const parser = new Parser();
+            const result = parser.parse(`40:7:23N,74:7:23W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
+        });
+
+        it(`returns the correct latitude and longitude for 40:7:23.9999N, 74:7:23.9999W`, () => {
+            const parser = new Parser({ precision: 5 });
+            const result = parser.parse(`40:7:23.9999N, 74:7:23.9999W`);
+            expect(result.latitude).toBe(40.12333);
+            expect(result.longitude).toBe(-74.12333);
+        });
     });
     describe('test dms unsigned format', () => {
         it(`returns the correct latitude and longitude for 40 7 23 -74 7 23`, () => {
