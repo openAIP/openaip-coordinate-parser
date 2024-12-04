@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DecimalSexaHemiFormat } from '../src/formats/decimal-sexa-hemi-format.js';
+import { DecimalSexaHemiFormat } from '../src/formats/decimal-signed-hemi-format.js';
 
 describe('canParse', () => {
     it('returns true for valid decimal format', () => {
