@@ -25,7 +25,7 @@
         "lib": [
             "es2023"
         ],
-        "module": "Node16",
+        "module": "commonjs",
         "target": "es2022",
         "moduleResolution": "node16"
     }
