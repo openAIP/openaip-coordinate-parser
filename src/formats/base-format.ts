@@ -13,16 +13,7 @@ export const OptionsSchema = z
 export type Config = z.infer<typeof OptionsSchema>;
 
 export interface IFormatParser {
-    precision: number;
-    longitude: number | undefined;
-    latitude: number | undefined;
-
     parse(coordinateString: string): Coordinate;
-    enforceValidLongitude(lonValue: unknown): void;
-    enforceValidLatitude(latValue: unknown): void;
-    enforceNoHyphen(coordinateString: string): void;
-    dmsToDecimal(dms: DmsCoordinate): number;
-    reset(): void;
 }
 
 export class BaseFormat implements IFormatParser {

@@ -11,11 +11,19 @@ import { validateSchema } from './validate-schema.js';
 export const OptionsSchema = z
     .object({
         precision: z.number().int().min(0).max(15),
+        extendFormatParsers: z.boolean().optional(),
+        formatParsers: z.array(z.any()).optional(),
     })
     .strict()
     .optional()
     .describe('OptionsSchema');
-export type Options = z.infer<typeof OptionsSchema>;
+
+export type Options = {
+    precision: number;
+    // if true, the given format parsers will be appended to the default parsers instead of replacing them
+    extendFormatParsers?: boolean;
+    formatParsers?: IFormatParser[];
+};
 
 export class Parser {
     originalString: string;
@@ -28,20 +36,28 @@ export class Parser {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
         validateSchema(options, OptionsSchema, { assert: true, name: 'options' });
 
-        const defaultOptions = { precision: 3 };
-        const opts = { ...defaultOptions, ...options };
-
+        const defaultOptions = {
+            precision: 3,
+            extendFormatParsers: false,
+        };
+        const { precision, extendFormatParsers } = { ...defaultOptions, ...options };
+        // set default format parsers to use if not provided
+        const defaultParsers = [
+            new DecimalFormat({ precision: precision }),
+            new DecimalHemiFormat({ precision: precision }),
+            new DecimalSexaFormat({ precision: precision }),
+            new DecimalSexaHemiFormat({ precision: precision }),
+            new DmsDecimalMinFormat({ precision: precision }),
+        ];
+        let formatParsers = options?.formatParsers || defaultParsers;
+        if (formatParsers.length > 0 && extendFormatParsers === true) {
+            formatParsers = [...defaultParsers, ...formatParsers];
+        }
         this.originalString = coordinateString;
-        this.opts = opts;
+        this.opts = { precision: precision };
         this.latitude = undefined;
         this.longitude = undefined;
-        this.parsers = [
-            new DecimalFormat(this.opts),
-            new DecimalHemiFormat(this.opts),
-            new DecimalSexaFormat(this.opts),
-            new DecimalSexaHemiFormat(this.opts),
-            new DmsDecimalMinFormat(this.opts),
-        ];
+        this.parsers = formatParsers;
 
         try {
             const { longitude, latitude } = this.parse(coordinateString);
