@@ -9,6 +9,7 @@ import { DecimalUnsignedSuffixedHemisphereFormat } from './formats/decimal-unsig
 import { DmUnsignedPrefixedHemisphereFormat } from './formats/dm-unsigned-prefixed-hemisphere-format.js';
 import { DmUnsignedSuffixedHemisphereFormat } from './formats/dm-unsigned-suffixed-hemisphere-format.js';
 import { DmsSignedFormat } from './formats/dms-signed-format.js';
+import { DmsUnsignedFormat } from './formats/dms-unsigned-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
 
@@ -54,6 +55,7 @@ export class Parser {
             new DmUnsignedPrefixedHemisphereFormat({ precision: precision }),
             new DmUnsignedSuffixedHemisphereFormat({ precision: precision }),
             new DmsSignedFormat({ precision: precision }),
+            new DmsUnsignedFormat({ precision: precision }),
         ];
         let formatParsers = options?.formatParsers || defaultParsers;
         if (formatParsers.length > 0 && extendFormatParsers === true) {
