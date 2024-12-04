@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import type { IFormatParser } from './formats/base-format.js';
-import { DecimalFormat } from './formats/decimal-format.js';
-import { DecimalHemiFormat } from './formats/decimal-hemi-format.js';
 import { DecimalSignedFormat } from './formats/decimal-signed-format.js';
 import { DecimalSignedSuffixedHemisphereFormat } from './formats/decimal-signed-suffixed-hemisphere-format.js';
-import { DmHemisphereFormat } from './formats/dm-hemisphere-format.js';
+import { DecimalUnsignedFormat } from './formats/decimal-unsigned-format.js';
+import { DecimalUnsignedSuffixedHemisphereFormat } from './formats/decimal-unsigned-suffixed-hemisphere-format.js';
+import { DmUnsignedSuffixedHemisphereFormat } from './formats/dm-unsigned-suffixed-hemisphere-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
 
@@ -43,11 +43,11 @@ export class Parser {
         const { precision, extendFormatParsers } = { ...defaultOptions, ...options };
         // set default format parsers to use if not provided
         const defaultParsers = [
-            new DecimalFormat({ precision: precision }),
-            new DecimalHemiFormat({ precision: precision }),
+            new DecimalUnsignedFormat({ precision: precision }),
+            new DecimalUnsignedSuffixedHemisphereFormat({ precision: precision }),
             new DecimalSignedFormat({ precision: precision }),
             new DecimalSignedSuffixedHemisphereFormat({ precision: precision }),
-            new DmHemisphereFormat({ precision: precision }),
+            new DmUnsignedSuffixedHemisphereFormat({ precision: precision }),
         ];
         let formatParsers = options?.formatParsers || defaultParsers;
         if (formatParsers.length > 0 && extendFormatParsers === true) {

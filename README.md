@@ -23,10 +23,10 @@ required ones. Each format parser can be configured individually:
 
 ```javascript
 import { Parser } from '@openaip/openaip-coordinate-parser';
-import { DecimalFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
+import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
 
 // only parsing two formats is ever required
-const decimalParser = new DecimalFormat({ precision: 5 });
+const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
 const decimalSexaParser = new DecimalSignedFormat({ precision: 3 });
 // only use two parsers instead of all default ones
 const parser = new Parser({ formatParsers: [decimalParser, decimalSexaParser] });
@@ -50,10 +50,10 @@ parser identified with `canParse` wins!
 ```javascript
 import { Parser } from '@openaip/openaip-coordinate-parser';
 import { IFormatParser } from '@openaip/openaip-coordinate-parser/formats/base-format.js';
-import { DecimalFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
+import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
 
 // available format parser
-const decimalParser = new DecimalFormat({ precision: 5 });
+const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
 // your custom format parser
 export class MyCustomFormatParser implements IFormatParser {
     parse(coordinateString: string): Coordinate {
