@@ -13,22 +13,22 @@ describe('parse', () => {
     it(`returns the correct latitude and longitude for 40:7:23 -74:7:23`, () => {
         const formatParser = new DmsUnsignedDelimitedFormat();
         const result = formatParser.parse(`40:7:23 -74:7:23`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 40:7:23, -74:7:23`, () => {
         const formatParser = new DmsUnsignedDelimitedFormat();
         const result = formatParser.parse(`40:7:23, -74:7:23`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 40:7:23,-74:7:23`, () => {
         const formatParser = new DmsUnsignedDelimitedFormat();
         const result = formatParser.parse(`40:7:23,-74:7:23`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 40:7:23.9999", -74:7:23.9999`, () => {

@@ -29,7 +29,7 @@ import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/format
 
 // only parsing two formats is ever required
 const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
-const decimalSexaParser = new DecimalSignedFormat({ precision: 3 });
+const decimalSexaParser = new DecimalSignedFormat({ precision: 5 });
 // only use two parsers instead of all default ones
 const parser = new Parser({ formatParsers: [decimalParser, decimalSexaParser] });
 

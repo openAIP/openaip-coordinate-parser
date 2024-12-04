@@ -47,7 +47,7 @@ export class Parser {
         validateSchema(options, OptionsSchema, { assert: true, name: 'options' });
 
         const defaultOptions = {
-            precision: 3,
+            precision: 5,
             extendFormatParsers: false,
         };
         const { precision, extendFormatParsers } = { ...defaultOptions, ...options };

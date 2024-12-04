@@ -25,7 +25,7 @@ export class BaseFormat implements IFormatParser {
     constructor(options?: Config) {
         validateSchema(options, OptionsSchema, { assert: true, name: 'config' });
 
-        const defaultOptions = { precision: 3 };
+        const defaultOptions = { precision: 5 };
         const { precision } = { ...defaultOptions, ...options };
 
         this.precision = precision;

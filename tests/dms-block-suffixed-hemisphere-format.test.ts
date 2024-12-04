@@ -13,22 +13,22 @@ describe('parse', () => {
     it(`returns the correct latitude and longitude for 400723N 0740723W`, () => {
         const formatParser = new DmsBlockSuffixedHemisphereFormat();
         const result = formatParser.parse(`400723N 0740723W`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 400723N0740723W`, () => {
         const formatParser = new DmsBlockSuffixedHemisphereFormat();
         const result = formatParser.parse(`400723N0740723W`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 400723N, 0740723W`, () => {
         const formatParser = new DmsBlockSuffixedHemisphereFormat();
         const result = formatParser.parse(`400723N, 0740723W`);
-        expect(result.latitude).toBe(40.123);
-        expect(result.longitude).toBe(-74.123);
+        expect(result.latitude).toBe(40.12306);
+        expect(result.longitude).toBe(-74.12306);
     });
 
     it(`returns the correct latitude and longitude for 400723.999N, 0740723.999W`, () => {
