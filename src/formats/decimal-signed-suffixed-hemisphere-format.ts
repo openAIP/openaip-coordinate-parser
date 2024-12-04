@@ -17,11 +17,11 @@ const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*(°)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?
  * 1.234°N,5.678°E
  * 1.234°N5.678°E
  */
-export class DecimalSexaHemiFormat extends BaseFormat {
+export class DecimalSignedSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-        if (DecimalSexaHemiFormat.canParse(coordinateString) === false) {
+        if (DecimalSignedSuffixedHemisphereFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         // use the regex to parse the latitude and longitude
@@ -47,8 +47,7 @@ export class DecimalSexaHemiFormat extends BaseFormat {
     }
 
     static canParse(coordinateString: string): boolean {
-         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
-
+        validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
         return REGEX.test(coordinateString);
     }
