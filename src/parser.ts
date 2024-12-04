@@ -2,8 +2,8 @@ import { z } from 'zod';
 import type { IFormatParser } from './formats/base-format.js';
 import { DecimalFormat } from './formats/decimal-format.js';
 import { DecimalHemiFormat } from './formats/decimal-hemi-format.js';
-import { DecimalSexaFormat } from './formats/decimal-sexa-format.js';
 import { DecimalSexaHemiFormat } from './formats/decimal-sexa-hemi-format.js';
+import { DecimalSignedFormat } from './formats/decimal-signed-format.js';
 import { DmsDecimalMinFormat } from './formats/dms-decimal-min-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
@@ -45,7 +45,7 @@ export class Parser {
         const defaultParsers = [
             new DecimalFormat({ precision: precision }),
             new DecimalHemiFormat({ precision: precision }),
-            new DecimalSexaFormat({ precision: precision }),
+            new DecimalSignedFormat({ precision: precision }),
             new DecimalSexaHemiFormat({ precision: precision }),
             new DmsDecimalMinFormat({ precision: precision }),
         ];

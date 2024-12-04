@@ -27,7 +27,7 @@ import { DecimalFormat } from '@openaip/openaip-coordinate-parser/formats/decima
 
 // only parsing two formats is ever required
 const decimalParser = new DecimalFormat({ precision: 5 });
-const decimalSexaParser = new DecimalSexaFormat({ precision: 3 });
+const decimalSexaParser = new DecimalSignedFormat({ precision: 3 });
 // only use two parsers instead of all default ones
 const parser = new Parser({ formatParsers: [decimalParser, decimalSexaParser] });
 
@@ -42,7 +42,7 @@ const longitude = coordinates.longitude; // 5.678
 
 #### Extending the parser
 
-The parser can easily be extended with custom parsing logic. Simply provide your own format parser that provides the `parse` and `canParse`
+The parser can easily be extended with custom parsing logic. Simply provide your own format parser that provides the `parse`, `canParse` and `reset`
 methods. The `canParse` method must return `true` if the parser is able to parse given coordinate string, `false` if not. The `parse` method is used to extract decimal `longitude` and `latitude` values from the coordinate string. Please note that the
 ordering of format parsers is crucial if two parsers may be able to parse the same format - first
 parser identified with `canParse` wins!
@@ -69,6 +69,10 @@ export class MyCustomFormatParser implements IFormatParser {
     static canParse(coordinateString: string): boolean {
         // verify that the parser can actually parse the string - if true, the parser will be used to parse the coordinates
         return /^.*$/.test(coordinateString);
+    }
+
+    reset() {
+        // do reset logic
     }
 }
 

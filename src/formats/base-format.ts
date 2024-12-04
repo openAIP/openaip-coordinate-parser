@@ -14,6 +14,7 @@ export type Config = z.infer<typeof OptionsSchema>;
 
 export interface IFormatParser {
     parse(coordinateString: string): Coordinate;
+    reset(): void;
 }
 
 export class BaseFormat implements IFormatParser {
