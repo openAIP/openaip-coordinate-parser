@@ -23,8 +23,11 @@
     "module": "./dist/esm/index.mjs",
     "types": "./dist/types/index.d.ts",
     "exports": {
-        "require": "./dist/cjs/index.js",
-        "import": "./dist/esm/index.mjs"
+        ".": {
+            "import": "./dist/esm/index.js",
+            "require": "./dist/cjs/index.js",
+            "types": "./dist/types/index.d.ts"
+        }
     },
     "files": [
         "dist"

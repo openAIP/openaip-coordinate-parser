@@ -6,7 +6,7 @@
         "declaration": true,
         "declarationDir": "./dist/types",
         "strict": true,
-        "esModuleInterop": true,
+        // "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
