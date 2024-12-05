@@ -4,6 +4,7 @@ import { DmsUnsignedDelimitedSuffixedHemisphereFormat } from '../src/formats/dms
 describe('canParse', () => {
     it('returns true for known formats', () => {
         expect(DmsUnsignedDelimitedSuffixedHemisphereFormat.canParse(`40:7:23N 74:7:23W`)).toBe(true);
+        expect(DmsUnsignedDelimitedSuffixedHemisphereFormat.canParse(`35:02:15 N 131:59:23 E`)).toBe(true);
         expect(DmsUnsignedDelimitedSuffixedHemisphereFormat.canParse(`40:7:23N74:7:23W`)).toBe(true);
         expect(DmsUnsignedDelimitedSuffixedHemisphereFormat.canParse(`40:7:23N, 74:7:23W`)).toBe(true);
         expect(DmsUnsignedDelimitedSuffixedHemisphereFormat.canParse(`40:7:23N,74:7:23W`)).toBe(true);
@@ -16,6 +17,13 @@ describe('parse', () => {
         const result = formatParser.parse(`40:7:23N 74:7:23W`);
         expect(result.latitude).toBe(40.12306);
         expect(result.longitude).toBe(-74.12306);
+    });
+
+    it(`returns the correct latitude and longitude for 35:02:15 N 131:59:23 E`, () => {
+        const formatParser = new DmsUnsignedDelimitedSuffixedHemisphereFormat();
+        const result = formatParser.parse(`35:02:15 N 131:59:23 E`);
+        expect(result.latitude).toBe(35.0375);
+        expect(result.longitude).toBe(131.98972);
     });
 
     it(`returns the correct latitude and longitude for 40:7:23N74:7:23W`, () => {
