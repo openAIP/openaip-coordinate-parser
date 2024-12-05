@@ -704,6 +704,4 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.longitude).toBe(-74.12333);
         });
     });
-    // describe('test', () => {});
-    // describe('test', () => {});
 });
