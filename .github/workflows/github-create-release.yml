@@ -60,6 +60,22 @@ jobs:
                       Various fixes and performance improvements.
                   draft: false
                   prerelease: false
+            # publish to GitHub Package Registry for internal use with @openaip namespace
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  registry-url: https://npm.pkg.github.com/
+                  scope: '@openaip'
+            - run: npm publish --access public
+              name: Publish to GitHub Package Registry
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.GHPR_NPM_TOKEN}}
+            # publish to NPM for public access
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 22
+                  registry-url: https://registry.npmjs.org
+                  scope: '@openaip'
             - run: npm publish --access public
               name: Publish to NPM Package Registry
               env:
