@@ -91,8 +91,8 @@ export class BaseFormat implements IFormatParser {
             throw new Error('minutes must be numeric');
         }
         const min = Number.parseFloat((minutes as any).toString());
-        if (min < 0 || min >= 60) {
-            throw new Error('minutes must be within the range of 0 to 59');
+        if (min < 0 || min > 60) {
+            throw new Error('minutes must be within the range of 0 to 60');
         }
     }
 
@@ -101,8 +101,8 @@ export class BaseFormat implements IFormatParser {
             throw new Error('seconds must be numeric');
         }
         const sec = Number.parseFloat(seconds.toString());
-        if (sec < 0 || sec >= 60) {
-            throw new Error('seconds must be within the range of 0 to 59');
+        if (sec < 0 || sec > 60) {
+            throw new Error('seconds must be within the range of 0 to 60');
         }
     }
 
