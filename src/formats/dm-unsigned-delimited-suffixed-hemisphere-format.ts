@@ -3,21 +3,21 @@ import type { Coordinate, DmsCoordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^([NS]\s*\d{3,4}(\.\d+)?\s*)\s*([EW]\s*\d{3,5}(\.\d+)?\s*)$/;
+const REGEX = /^(\d+:\d+(\.\d+)?\s*[NS])\s*(\d+:\d+(\.\d+)?\s*[EW])$/;
 
 /**
  * Supported formats:
  *
- * N4007 W7407
- * N4007.38W7407.38
- * N 4007.38 W 7407.38
- * N4007.38 W7407.38
+ * 40:07N 74:07W
+ * 40:07.38N74:07.38W
+ * 40:07.38 N 74:07.38 W
+ * 40:07.38N 74:07.38W
  */
-export class DmUnsignedPrefixedHemisphereFormat extends BaseFormat {
+export class DmUnsignedDelimitedSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-        if (DmUnsignedPrefixedHemisphereFormat.canParse(coordinateString) === false) {
+        if (DmUnsignedDelimitedSuffixedHemisphereFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         this.enforceNoHyphen(coordinateString);
@@ -51,13 +51,13 @@ export class DmUnsignedPrefixedHemisphereFormat extends BaseFormat {
     toDms(value: string): DmsCoordinate {
         validateSchema(value, z.string(), { assert: true, name: 'value' });
 
-        const match = value.match(/^([NSWE])(\d{2,3})(\d{2})(\.\d+)?$/);
+        const match = value.match(/^(\d{2,3}):(\d{2})(\.\d+)?\s*([NSWE])$/);
         if (match) {
             return {
-                degrees: parseInt(match[2], 10),
-                minutes: parseInt(match[3], 10),
-                seconds: Math.round(60 * parseFloat(`0${match[4]}`)),
-                direction: match[1],
+                degrees: parseInt(match[1], 10),
+                minutes: parseInt(match[2], 10),
+                seconds: Math.round(60 * parseFloat(`0${match[3]}`)),
+                direction: match[4],
             };
         } else {
             throw new Error('Invalid coordinate string');

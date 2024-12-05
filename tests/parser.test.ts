@@ -290,6 +290,64 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.longitude).toBe(-74.12306);
         });
     });
+    describe('test dm unsigned delimited prefixed hemisphere format', () => {
+        it("returns the correct latitude and longitude for 'N40:07 W74:07'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N40:07 W74:07');
+            expect(result.latitude).toBe(40.11667);
+            expect(result.longitude).toBe(-74.11667);
+        });
+
+        it("returns the correct latitude and longitude for 'N40:07.38W74:07.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N40:07.38W74:07.38');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+
+        it("returns the correct latitude and longitude for 'N 40:07.38 W 74:07.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N 40:07.38 W 74:07.38');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+
+        it("returns the correct latitude and longitude for 'N40:07.38 W74:07.38'", () => {
+            const parser = new Parser();
+            const result = parser.parse('N40:07.38 W74:07.38');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+    });
+    describe('test dm unsigned delimited suffixed hemisphere format', () => {
+        it("returns the correct latitude and longitude for '40:07N 74:07W'", () => {
+            const parser = new Parser();
+            const result = parser.parse('40:07N 74:07W');
+            expect(result.latitude).toBe(40.11667);
+            expect(result.longitude).toBe(-74.11667);
+        });
+
+        it("returns the correct latitude and longitude for '40:07.38N74:07.38W'", () => {
+            const parser = new Parser();
+            const result = parser.parse('40:07.38N74:07.38W');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+
+        it("returns the correct latitude and longitude for '40:07.38 N 74:07.38 W'", () => {
+            const parser = new Parser();
+            const result = parser.parse('40:07.38 N 74:07.38 W');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+
+        it("returns the correct latitude and longitude for '40:07.38N 74:07.38W'", () => {
+            const parser = new Parser();
+            const result = parser.parse('40:07.38N 74:07.38W');
+            expect(result.latitude).toBe(40.12306);
+            expect(result.longitude).toBe(-74.12306);
+        });
+    });
     describe('test dms block prefixed hemisphere format', () => {
         it(`returns the correct latitude and longitude for N400723 W0740723`, () => {
             const parser = new Parser();

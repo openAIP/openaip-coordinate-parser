@@ -110,6 +110,10 @@ Currently the out-of-the-box format parsers supports the following various forma
 -   `N40:07 W74:07`
 -   `N40:07.38W74:07.38`
 -   `N 40:07.38 W 74:07.38`
+-   `40:07N 74:07W`
+-   `40:07.38N74:07.38W`
+-   `40:07.38 N 74:07.38 W`
+-   `40:07.38N 74:07.38W`
 -   `N40:07.38 W74:07.38`
 -   `4007 N 7407 W`
 -   `4007.38 N 7407.38 W`
