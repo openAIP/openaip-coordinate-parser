@@ -107,6 +107,10 @@ Currently the out-of-the-box format parsers supports the following various forma
 -   `12.234 N, 56.678 E`
 -   `N 4007 W 7407`
 -   `N 4007.38 W 7407.38`
+-   `N40:07 W74:07`
+-   `N40:07.38W74:07.38`
+-   `N 40:07.38 W 74:07.38`
+-   `N40:07.38 W74:07.38`
 -   `4007 N 7407 W`
 -   `4007.38 N 7407.38 W`
 -   `40°7'23" -74°7'23"`

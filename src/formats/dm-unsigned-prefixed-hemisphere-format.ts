@@ -6,8 +6,6 @@ import { BaseFormat } from './base-format.js';
 const REGEX = /^([NS]\s*\d{3,4}(\.\d+)?\s*)\s*([EW]\s*\d{3,5}(\.\d+)?\s*)$/;
 
 /**
- * Parses coordinates strings in DM format with decimal minutes.
- *
  * Supported formats:
  *
  * N4007 W7407

@@ -7,9 +7,6 @@ import { BaseFormat } from './base-format.js';
 const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*(°)\s*[, ]\s*(-?\d{1,3}(\.\d+)?)\s*(°)$/;
 
 /**
- * Parses coordinates strings in decimal format with sexagesimal notation. Coordinate ordering is
- * always latitude, longitude.
- *
  * Supported formats:
  *
  * 1.234° 5.678°

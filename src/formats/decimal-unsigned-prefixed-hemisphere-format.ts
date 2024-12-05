@@ -7,9 +7,6 @@ import { BaseFormat } from './base-format.js';
 const REGEX = /^([NS])\s*(-?\d{1,2}(\.\d+)?)\s*[, ]?\s*([EW])\s*(-?\d{1,3}(\.\d+)?)\s*$/;
 
 /**
- * Parses coordinates strings in decimal format with hemisphere notations. Coordinate ordering is
- * always latitude, longitude.
- *
  * Supported formats:
  *
  * N12,E56

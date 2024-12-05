@@ -3,21 +3,21 @@ import type { Coordinate, DmsCoordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
+const REGEX = /^([NS]\s*\d+:\d+(\.\d+)?)\s*([EW]\s*\d+:\d+(\.\d+)?)$/;
 
 /**
  * Supported formats:
  *
- * 4007N 7407W
- * 4007.38N7407.38W
- * 4007.38 N 7407.38 W
- * 4007.38N 7407.38W
+ * N40:07 W74:07
+ * N40:07.38W74:07.38
+ * N 40:07.38 W 74:07.38
+ * N40:07.38 W74:07.38
  */
-export class DmUnsignedSuffixedHemisphereFormat extends BaseFormat {
+export class DmUnsignedDelimitedPrefixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
-        if (DmUnsignedSuffixedHemisphereFormat.canParse(coordinateString) === false) {
+        if (DmUnsignedDelimitedPrefixedHemisphereFormat.canParse(coordinateString) === false) {
             throw new Error('Invalid coordinate string');
         }
         this.enforceNoHyphen(coordinateString);
@@ -46,18 +46,18 @@ export class DmUnsignedSuffixedHemisphereFormat extends BaseFormat {
     }
 
     /**
-     * Converts a DMS notation coordinate like "4007.38N" to DMS parts.
+     * Converts a DM notation coordinate like "4007.38N" to DMS parts.
      */
     toDms(value: string): DmsCoordinate {
         validateSchema(value, z.string(), { assert: true, name: 'value' });
 
-        const match = value.match(/^(\d{2,3})(\d{2})(\.\d+)?([NSWE])$/);
+        const match = value.match(/^([NSWE])(\d{2,3}):(\d{2})(\.\d+)?$/);
         if (match) {
             return {
-                degrees: parseInt(match[1], 10),
-                minutes: parseInt(match[2], 10),
-                seconds: Math.round(60 * parseFloat(`0${match[3]}`)),
-                direction: match[4],
+                degrees: parseInt(match[2], 10),
+                minutes: parseInt(match[3], 10),
+                seconds: Math.round(60 * parseFloat(`0${match[4]}`)),
+                direction: match[1],
             };
         } else {
             throw new Error('Invalid coordinate string');

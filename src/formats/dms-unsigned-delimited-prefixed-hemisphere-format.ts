@@ -6,9 +6,6 @@ import { BaseFormat } from './base-format.js';
 const REGEX = /^([NS])\s*(\d+):(\d+):(\d+(?:\.\d+)?)\s*,?\s*([EW])\s*(\d+):(\d+):(\d+(?:\.\d+)?)$/;
 
 /**
- * Parses coordinates strings in DMS unsigned delimited prefixed hemisphere format. Coordinate ordering is
- * always latitude, longitude.
- *
  * Supported formats:
  *
  * N40:7:23 W74:7:23
