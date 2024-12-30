@@ -11,7 +11,7 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
-              # this is important to make sure that tokens are not reused in subsequent steps
+              # IMPORTANT this is important to make sure that tokens are not reused in subsequent steps
               # -> removing this will cause the "GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}" to
               # reuse the token from the previous step although defined otherwise
               with:
@@ -40,7 +40,7 @@ jobs:
               uses: actions/checkout@v4
               env:
                   GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
-              # this is important to make sure that tokens are not reused in subsequent steps
+              # IMPORTANT this is important to make sure that tokens are not reused in subsequent steps
               # -> removing this will cause the "GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}" to
               # reuse the token from the previous step although defined otherwise
               with:
