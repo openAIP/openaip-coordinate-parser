@@ -11,10 +11,14 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Clear npm cache
               run: npm cache clean --force
             - name: Configure .npmrc
