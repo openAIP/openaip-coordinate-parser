@@ -52,18 +52,27 @@ jobs:
               run: npm install
             - name: NPM build package
               run: npm run build
-            - name: Bump package version
-              id: bump-version
-              uses: phips28/gh-action-bump-version@master
-              env:
-                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
-              with:
-                  major-wording: "#build-major"
-                  minor-wording: "#build-minor"
-                  patch-wording: "#build-patch"
-                  # use "patch" as default bump strategy
-                  default: patch
-                  tag-prefix: "v"
+            # - name: Bump package version
+            #   id: bump-version
+            #   uses: phips28/gh-action-bump-version@master
+            #   env:
+            #       GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
+            #   with:
+            #       major-wording: "#build-major"
+            #       minor-wording: "#build-minor"
+            #       patch-wording: "#build-patch"
+            #       # use "patch" as default bump strategy
+            #       default: patch
+            #       tag-prefix: "v"
+            - name: Push changes
+                run: |
+                git config --global user.email "you@example.com"
+                git config --global user.name "Your Name"
+                git commit -am "Bump version to ${{steps.bump-version.outputs.newVersion}}"
+                git tag "v${{steps.bump-version.outputs.newVersion}}"
+                git push origin HEAD --tags
+                env:
+                GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Create release
               uses: actions/create-release@v1
               env:
