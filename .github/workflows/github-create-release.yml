@@ -31,10 +31,14 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Clear npm cache
               run: npm cache clean --force
             - name: Configure .npmrc
@@ -73,6 +77,8 @@ jobs:
                   node-version: 22
                   registry-url: https://npm.pkg.github.com/
                   scope: '@openaip'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Publish to GitHub Package Registry
               run: npm publish
               env:
@@ -83,6 +89,8 @@ jobs:
                   node-version: 22
                   registry-url: https://registry.npmjs.org
                   scope: '@openaip'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Publish to NPM Package Registry
               run: npm publish --access public
               env:
