@@ -25,7 +25,8 @@ required ones. Each format parser can be configured individually:
 
 ```javascript
 import { Parser } from '@openaip/openaip-coordinate-parser';
-import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
+import { DecimalSignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-signed-format.js';
+import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-unsigned-format.js';
 
 // only parsing two formats is ever required
 const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
