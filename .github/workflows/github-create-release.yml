@@ -65,13 +65,13 @@ jobs:
             #       default: patch
             #       tag-prefix: "v"
             - name: Push changes
-                run: |
-                git config --global user.email "you@example.com"
-                git config --global user.name "Your Name"
-                git commit -am "Bump version to ${{steps.bump-version.outputs.newVersion}}"
-                git tag "v${{steps.bump-version.outputs.newVersion}}"
-                git push origin HEAD --tags
-                env:
+              run: |
+                  git config --global user.email "you@example.com"
+                  git config --global user.name "Your Name"
+                  git commit -am "Bump version to ${{steps.bump-version.outputs.newVersion}}"
+                  git tag "v${{steps.bump-version.outputs.newVersion}}"
+                  git push origin HEAD --tags
+              env:
                 GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
             - name: Create release
               uses: actions/create-release@v1
