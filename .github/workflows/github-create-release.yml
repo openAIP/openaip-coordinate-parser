@@ -64,8 +64,7 @@ jobs:
               id: bump-version
               uses: phips28/gh-action-bump-version@master
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                #   GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
+                  GITHUB_TOKEN: ${{ secrets.AUTOMATOR_DEVOPS_PAT }}
               with:
                   major-wording: "#build-major"
                   minor-wording: "#build-minor"
