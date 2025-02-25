@@ -9,9 +9,10 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
+        "useUnknownInCatchVariables": false,
         "moduleResolution": "node",
         "baseUrl": ".",
-        "rootDir": "./src"
+        "rootDir": "./src",
     },
     "include": [
         "src"
