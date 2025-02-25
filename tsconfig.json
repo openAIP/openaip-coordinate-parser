@@ -11,8 +11,8 @@
         "forceConsistentCasingInFileNames": true,
         "useUnknownInCatchVariables": false,
         "moduleResolution": "node",
-        "baseUrl": ".",
         "rootDir": "./src",
+        "baseUrl": ".",
     },
     "include": [
         "src"
