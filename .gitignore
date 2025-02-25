@@ -8,3 +8,4 @@ nohup.out
 dist/
 .eslintcache
 .DS_Store
+.history/
