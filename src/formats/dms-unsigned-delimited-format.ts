@@ -11,6 +11,7 @@ const REGEX = /^(-?\d+):(\d+):(\d+(?:\.\d+)?)\s*\,?\s*(-?\d+):(\d+):(\d+(?:\.\d+
  * 40:7:23 -74:7:23
  * 40:7:23, -74:7:23
  * 40:7:23.123, -74:7:23.123
+ * ... and additional variants with spaces and comma.
  */
 export class DmsUnsignedDelimitedFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {

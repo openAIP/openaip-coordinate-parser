@@ -14,6 +14,7 @@ const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([E
  * 12.234 N, 56.678 E
  * 12.234N,56.678E
  * 12.234N56.678E
+ * ... and additional variants with spaces and comma.
  */
 export class DecimalUnsignedSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {

@@ -12,6 +12,7 @@ const REGEX = /^(\d{3,4}(\.\d+)?\s*[NS])\s*(\d{3,5}(\.\d+)?\s*[EW])$/;
  * 4007.38N7407.38W
  * 4007.38 N 7407.38 W
  * 4007.38N 7407.38W
+ * ... and additional variants with spaces and comma.
  */
 export class DmUnsignedSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {

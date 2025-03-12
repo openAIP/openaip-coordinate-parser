@@ -551,6 +551,37 @@ describe('Test that all configured format parsers do not interfere', () => {
             expect(result.longitude).toBe(-74.12333);
         });
     });
+
+    describe('test dm signed suffixed hemisphere format', () => {
+        it("returns the correct latitude and longitude for '54°09.36'N 009°11.43'E'", () => {
+            const parser = new Parser();
+            const result = parser.parse(`54°09.36'N 009°11.43'E`);
+            expect(result.latitude).toBe(0);
+            expect(result.longitude).toBe(0);
+        });
+
+        it("returns the correct latitude and longitude for '54°09.36'N,009°11.43'E'", () => {
+            const parser = new Parser();
+            const result = parser.parse(`54°09.36'N,009°11.43'E`);
+            expect(result.latitude).toBe(0);
+            expect(result.longitude).toBe(0);
+        });
+
+        it("returns the correct latitude and longitude for '54° 09.36' N 009° 11.43' E'", () => {
+            const parser = new Parser();
+            const result = parser.parse(`54° 09.36' N 009° 11.43' E`);
+            expect(result.latitude).toBe(0);
+            expect(result.longitude).toBe(0);
+        });
+
+        it("returns the correct latitude and longitude for '54° 09.36' N , 009° 11.43' E'", () => {
+            const parser = new Parser();
+            const result = parser.parse(`54°09.36'N,009°11.43'E`);
+            expect(result.latitude).toBe(0);
+            expect(result.longitude).toBe(0);
+        });
+    });
+
     describe('test dms unsigned delimited format', () => {
         it(`returns the correct latitude and longitude for 40:7:23 -74:7:23`, () => {
             const parser = new Parser();

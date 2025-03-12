@@ -12,6 +12,8 @@ const REGEX = /^(\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"\s*([NS])\s*,?\s*(\d+)°\s*(
  * 40°7'23"N, 74°7'23"W
  * 40°7'23"N74°7'23"W
  * 40°7'23.123"N 74°7'23.123"W
+ * 40°7'23.123"N, 74°7'23.123"W
+ * ... and additional variants with spaces and comma.
  */
 export class DmsSignedSuffixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {

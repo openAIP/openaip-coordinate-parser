@@ -11,6 +11,7 @@ const REGEX = /^([NS])(\d{2})(\d{2})(\d{2}(\.\d+)?)\s*,?\s*([EW])(\d{3})(\d{2})(
  * N044506 E1030342
  * N044506E1030342
  * N044506.123 E1030342.123
+ * ... and additional variants with spaces and comma.
  */
 export class DmsBlockPrefixedHemisphereFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
