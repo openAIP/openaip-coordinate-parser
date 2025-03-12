@@ -127,6 +127,8 @@ Currently the out-of-the-box format parsers supports the following various forma
 -   `40°7'23"N 74°7'23"W`
 -   `40°7'23"N, 74°7'23"W`
 -   `40°7'23.123"N 74°7'23.123"W`
+-   `54°09.36'N 009°11.43'E`
+-   `54°09.36'N, 009°11.43'E`
 -   `N40°7'23" W74°7'23"`
 -   `N40°7'23", W74°7'23"`
 -   `N40°7'23"W74°7'23"`
