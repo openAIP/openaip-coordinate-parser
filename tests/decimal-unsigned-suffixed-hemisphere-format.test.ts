@@ -11,44 +11,44 @@ describe('canParse', () => {
     });
 });
 describe('parse', () => {
-    it("returns the correct latitude and longitude for '12N 56E'", () => {
+    it(`returns the correct latitude and longitude for 12N 56E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('12N 56E');
+        const result = formatParser.parse(`12N 56E`);
         expect(result.latitude).toBe(12);
         expect(result.longitude).toBe(56);
     });
 
-    it("returns the correct latitude and longitude for '1.234N 5.678E'", () => {
+    it(`returns the correct latitude and longitude for 1.234N 5.678E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234N 5.678E');
+        const result = formatParser.parse(`1.234N 5.678E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234N 5.678E'", () => {
+    it(`returns the correct latitude and longitude for 1.234N 5.678E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234N 5.678E');
+        const result = formatParser.parse(`1.234N 5.678E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234  N 5.678 E'", () => {
+    it(`returns the correct latitude and longitude for 1.234  N 5.678 E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234  N 5.678 E');
+        const result = formatParser.parse(`1.234  N 5.678 E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234N5.678E'", () => {
+    it(`returns the correct latitude and longitude for 1.234N5.678E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234N5.678E');
+        const result = formatParser.parse(`1.234N5.678E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234N,5.678E'", () => {
+    it(`returns the correct latitude and longitude for 1.234N,5.678E`, () => {
         const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234N,5.678E');
+        const result = formatParser.parse(`1.234N,5.678E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });

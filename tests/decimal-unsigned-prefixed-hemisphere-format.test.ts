@@ -11,37 +11,37 @@ describe('canParse', () => {
     });
 });
 describe('parse', () => {
-    it("returns the correct latitude and longitude for 'N12 E56'", () => {
+    it(`returns the correct latitude and longitude for N12 E56`, () => {
         const formatParser = new DecimalUnsignedPrefixedHemisphereFormat();
-        const result = formatParser.parse('N12 E56');
+        const result = formatParser.parse(`N12 E56`);
         expect(result.latitude).toBe(12);
         expect(result.longitude).toBe(56);
     });
 
-    it("returns the correct latitude and longitude for 'N12,E56'", () => {
+    it(`returns the correct latitude and longitude for N12,E56`, () => {
         const formatParser = new DecimalUnsignedPrefixedHemisphereFormat();
-        const result = formatParser.parse('N12,E56');
+        const result = formatParser.parse(`N12,E56`);
         expect(result.latitude).toBe(12);
         expect(result.longitude).toBe(56);
     });
 
-    it("returns the correct latitude and longitude for 'N 12.234 E 56.678'", () => {
+    it(`returns the correct latitude and longitude for N 12.234 E 56.678`, () => {
         const formatParser = new DecimalUnsignedPrefixedHemisphereFormat();
-        const result = formatParser.parse('N 12.234 E 56.678');
+        const result = formatParser.parse(`N 12.234 E 56.678`);
         expect(result.latitude).toBe(12.234);
         expect(result.longitude).toBe(56.678);
     });
 
-    it("returns the correct latitude and longitude for 'N12.234,E56.678'", () => {
+    it(`returns the correct latitude and longitude for N12.234,E56.678`, () => {
         const formatParser = new DecimalUnsignedPrefixedHemisphereFormat();
-        const result = formatParser.parse('N12.234,E56.678');
+        const result = formatParser.parse(`N12.234,E56.678`);
         expect(result.latitude).toBe(12.234);
         expect(result.longitude).toBe(56.678);
     });
 
-    it("returns the correct latitude and longitude for 'N12.234E56.678'", () => {
+    it(`returns the correct latitude and longitude for N12.234E56.678`, () => {
         const formatParser = new DecimalUnsignedPrefixedHemisphereFormat();
-        const result = formatParser.parse('N12.234E56.678');
+        const result = formatParser.parse(`N12.234E56.678`);
         expect(result.latitude).toBe(12.234);
         expect(result.longitude).toBe(56.678);
     });

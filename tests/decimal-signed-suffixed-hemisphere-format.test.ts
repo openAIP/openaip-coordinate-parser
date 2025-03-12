@@ -12,44 +12,44 @@ describe('canParse', () => {
     });
 });
 describe('parse', () => {
-    it("returns the correct latitude and longitude for '12° N 5° E'", () => {
+    it(`returns the correct latitude and longitude for 12° N 5° E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('12° N 5° E');
+        const result = formatParser.parse(`12° N 5° E`);
         expect(result.latitude).toBe(12);
         expect(result.longitude).toBe(5);
     });
 
-    it("returns the correct latitude and longitude for '1.234° N 5.678° E'", () => {
+    it(`returns the correct latitude and longitude for 1.234° N 5.678° E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234° N 5.678° E');
+        const result = formatParser.parse(`1.234° N 5.678° E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234° N 5.678° E'", () => {
+    it(`returns the correct latitude and longitude for 1.234° N 5.678° E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234° N 5.678° E');
+        const result = formatParser.parse(`1.234° N 5.678° E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234  ° N 5.678 ° E'", () => {
+    it(`returns the correct latitude and longitude for 1.234  ° N 5.678 ° E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234  ° N 5.678 ° E');
+        const result = formatParser.parse(`1.234  ° N 5.678 ° E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234°N,5.678°E'", () => {
+    it(`returns the correct latitude and longitude for 1.234°N,5.678°E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234°N,5.678°E');
+        const result = formatParser.parse(`1.234°N,5.678°E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
 
-    it("returns the correct latitude and longitude for '1.234°N5.678°E'", () => {
+    it(`returns the correct latitude and longitude for 1.234°N5.678°E`, () => {
         const formatParser = new DecimalSignedSuffixedHemisphereFormat();
-        const result = formatParser.parse('1.234°N5.678°E');
+        const result = formatParser.parse(`1.234°N5.678°E`);
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });

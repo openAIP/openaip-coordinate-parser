@@ -13,49 +13,49 @@ describe('canParse', () => {
     });
 });
 describe('parse', () => {
-    it("returns the correct latitude and longitude for 40°07'N 74°07'W", () => {
+    it(`returns the correct latitude and longitude for 40°07'N 74°07'W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40°07'N 74°07'W`);
         expect(result.latitude).toBe(40.11667);
         expect(result.longitude).toBe(-74.11667);
     });
 
-    it("returns the correct latitude and longitude for 40°07.38'N74°07.38'W", () => {
+    it(`returns the correct latitude and longitude for 40°07.38'N74°07.38'W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40°07.38'N74°07.38'W`);
         expect(result.latitude).toBe(40.123);
         expect(result.longitude).toBe(-74.123);
     });
 
-    it("returns the correct latitude and longitude for 40°07.38' N 74°07.38' W", () => {
+    it(`returns the correct latitude and longitude for 40°07.38' N 74°07.38' W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40°07.38' N 74°07.38' W`);
         expect(result.latitude).toBe(40.123);
         expect(result.longitude).toBe(-74.123);
     });
 
-    it("returns the correct latitude and longitude for 40°07.38'N 74°07.38'W", () => {
+    it(`returns the correct latitude and longitude for 40°07.38'N 74°07.38'W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40°07.38'N 74°07.38'W`);
         expect(result.latitude).toBe(40.123);
         expect(result.longitude).toBe(-74.123);
     });
 
-    it("returns the correct latitude and longitude for 40° 07.38' N 74° 07.38' W", () => {
+    it(`returns the correct latitude and longitude for 40° 07.38' N 74° 07.38' W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40° 07.38' N 74° 07.38' W`);
         expect(result.latitude).toBe(40.123);
         expect(result.longitude).toBe(-74.123);
     });
 
-    it("returns the correct latitude and longitude for 40° 07.38'N, 74° 07.38' W", () => {
+    it(`returns the correct latitude and longitude for 40° 07.38'N, 74° 07.38' W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40° 07.38'N, 74° 07.38' W`);
         expect(result.latitude).toBe(40.123);
         expect(result.longitude).toBe(-74.123);
     });
 
-    it("returns the correct latitude and longitude for 40° 07.38'N,74° 07.38' W", () => {
+    it(`returns the correct latitude and longitude for 40° 07.38'N,74° 07.38' W`, () => {
         const formatParser = new DmSignedSuffixedHemisphereFormat();
         const result = formatParser.parse(`40° 07.38'N,74° 07.38' W`);
         expect(result.latitude).toBe(40.123);

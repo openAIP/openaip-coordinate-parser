@@ -34,11 +34,11 @@ const decimalSexaParser = new DecimalSignedFormat({ precision: 5 });
 // only use two parsers instead of all default ones
 const parser = new Parser({ formatParsers: [decimalParser, decimalSexaParser] });
 
-parser.parse('12.5678 45.6789');
+parser.parse(`12.5678 45.6789`);
 parser.getLatitude(); // 12.5678
 parser.getLongitude(); // 45.6789
 
-const coordinates = parser.parse('1.234° 5.678°');
+const coordinates = parser.parse(`1.234° 5.678°`);
 const latitude = coordinates.latitude; // 1.234
 const longitude = coordinates.longitude; // 5.678
 ```
