@@ -12,6 +12,7 @@ const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*(°)\s*[, ]\s*(-?\d{1,3}(\.\d+)?)\s*(°)$/
  * 1.234° 5.678°
  * 1.234°, 5.678°
  * 1.234°,5.678°
+ * ... and additional variants with spaces and comma.
  */
 export class DecimalSignedFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {

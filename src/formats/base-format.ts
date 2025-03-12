@@ -1,6 +1,12 @@
 import { z } from 'zod';
 import { isNumeric } from '../is-numeric.js';
-import { DmsCoordinateSchema, type Coordinate, type DmsCoordinate } from '../types.js';
+import {
+    DmCoordinateSchema,
+    DmsCoordinateSchema,
+    type Coordinate,
+    type DmCoordinate,
+    type DmsCoordinate,
+} from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 
 export const OptionsSchema = z
@@ -139,13 +145,29 @@ export class BaseFormat implements IFormatParser {
         validateSchema(dms, DmsCoordinateSchema, { assert: true, name: 'dms' });
 
         const { degrees, minutes, seconds, direction } = dms;
-
         // Calculate the decimal value
         let decimal =
             Number.parseInt(degrees.toString()) +
             Number.parseFloat(minutes.toString()) / 60 +
             Number.parseFloat(seconds.toString()) / 3600;
 
+        // Adjust for direction (North/East = positive, South/West = negative)
+        if (direction === 'S' || direction === 'W') {
+            decimal = -decimal;
+        }
+
+        return decimal;
+    }
+
+    /**
+     * Converts DM coordinate parts i.e. degrees and decimal minutes to a decimal value.
+     */
+    dmToDecimal(dm: DmCoordinate): number {
+        validateSchema(dm, DmCoordinateSchema, { assert: true, name: 'dm' });
+
+        const { degrees, minutes, direction } = dm;
+        // Calculate the decimal value
+        let decimal = Number.parseInt(degrees.toString()) + Number.parseFloat(minutes.toString()) / 60;
         // Adjust for direction (North/East = positive, South/West = negative)
         if (direction === 'S' || direction === 'W') {
             decimal = -decimal;

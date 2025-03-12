@@ -11,6 +11,7 @@ const REGEX = /^(-?\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"\s*,?\s*(-?\d+)°\s*(\d+)'
  * 40°7'23" -74°7'23"
  * 40°7'23", -74°7'23"
  * 40°7'23.123", -74°7'23.123"
+ * ... and additional variants with spaces and comma.
  */
 export class DmsSignedFormat extends BaseFormat {
     parse(coordinateString: string): Coordinate {
