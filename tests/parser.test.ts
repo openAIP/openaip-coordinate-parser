@@ -553,32 +553,32 @@ describe('Test that all configured format parsers do not interfere', () => {
     });
 
     describe('test dm signed suffixed hemisphere format', () => {
-        it("returns the correct latitude and longitude for '54°09.36'N 009°11.43'E'", () => {
+        it("returns the correct latitude and longitude for 40°07'N 74°07'W", () => {
             const parser = new Parser();
-            const result = parser.parse(`54°09.36'N 009°11.43'E`);
-            expect(result.latitude).toBe(0);
-            expect(result.longitude).toBe(0);
+            const result = parser.parse(`40°07'N 74°07'W`);
+            expect(result.latitude).toBe(40.11667);
+            expect(result.longitude).toBe(-74.11667);
         });
 
-        it("returns the correct latitude and longitude for '54°09.36'N,009°11.43'E'", () => {
+        it("returns the correct latitude and longitude for 40°07.38'N74°07.38'W", () => {
             const parser = new Parser();
-            const result = parser.parse(`54°09.36'N,009°11.43'E`);
-            expect(result.latitude).toBe(0);
-            expect(result.longitude).toBe(0);
+            const result = parser.parse(`40°07.38'N74°07.38'W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
         });
 
-        it("returns the correct latitude and longitude for '54° 09.36' N 009° 11.43' E'", () => {
+        it("returns the correct latitude and longitude for 40°07.38' N 74°07.38' W", () => {
             const parser = new Parser();
-            const result = parser.parse(`54° 09.36' N 009° 11.43' E`);
-            expect(result.latitude).toBe(0);
-            expect(result.longitude).toBe(0);
+            const result = parser.parse(`40°07.38' N 74°07.38' W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
         });
 
-        it("returns the correct latitude and longitude for '54° 09.36' N , 009° 11.43' E'", () => {
+        it("returns the correct latitude and longitude for 40°07.38'N 74°07.38'W", () => {
             const parser = new Parser();
-            const result = parser.parse(`54°09.36'N,009°11.43'E`);
-            expect(result.latitude).toBe(0);
-            expect(result.longitude).toBe(0);
+            const result = parser.parse(`40°07.38'N 74°07.38'W`);
+            expect(result.latitude).toBe(40.123);
+            expect(result.longitude).toBe(-74.123);
         });
     });
 
