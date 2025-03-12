@@ -77,7 +77,7 @@ function buildErrorMessage(config: {
 }): string {
     let message = 'Schema validation failed';
     if (config.name) {
-        message += ` for parameter '${config.name}'`;
+        message += ` for parameter '${config.name}`;
     }
     message += `. Expected to match schema${isNonEmpty(config.schema) ? ' non-empty' : ''} '${config.schema.description || config.schema._def.typeName.replace(/Zod/, '') || 'UNKNOWN'}'.`;
     // add more error details for path

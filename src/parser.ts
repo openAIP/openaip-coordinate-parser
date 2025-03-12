@@ -22,6 +22,7 @@ import { DmsUnsignedDelimitedSuffixedHemisphereFormat } from './formats/dms-unsi
 import { DmsUnsignedFormat } from './formats/dms-unsigned-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
+import { DmSignedPrefixedHemisphereFormat } from './formats/dm-signed-prefixed-hemisphere-format.js';
 
 export const OptionsSchema = z
     .object({
@@ -63,6 +64,7 @@ export class Parser {
             new DecimalUnsignedPrefixedHemisphereFormat({ precision: precision }),
             new DecimalSignedSuffixedHemisphereFormat({ precision: precision }),
             new DmSignedSuffixedHemisphereFormat({ precision: precision }),
+            new DmSignedPrefixedHemisphereFormat({ precision: precision }),
             new DmUnsignedDelimitedPrefixedHemisphereFormat({ precision: precision }),
             new DmUnsignedDelimitedSuffixedHemisphereFormat({ precision: precision }),
             new DmUnsignedPrefixedHemisphereFormat({ precision: precision }),
