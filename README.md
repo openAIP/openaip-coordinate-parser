@@ -9,7 +9,7 @@ add other format parsers are always welcome!
 The parser provides parsing all known formats right out-of-the-box:
 
 ```javascript
-import { Parser } from '@openaip/openaip-coordinate-parser';
+import { Parser } from '@openaip/coordinate-parser';
 
 const coordinateString = '12.5678 45.6789';
 const coordinates = parser.parse(coordinateString);
@@ -24,9 +24,9 @@ if only parsing a known number of coordinate formats is required, the used forma
 required ones. Each format parser can be configured individually:
 
 ```javascript
-import { Parser } from '@openaip/openaip-coordinate-parser';
-import { DecimalSignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-signed-format.js';
-import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-unsigned-format.js';
+import { Parser } from '@openaip/coordinate-parser';
+import { DecimalSignedFormat } from '@openaip/coordinate-parser/formats/decimal-signed-format.js';
+import { DecimalUnsignedFormat } from '@openaip/coordinate-parser/formats/decimal-unsigned-format.js';
 
 // only parsing two formats is ever required
 const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
@@ -51,9 +51,9 @@ ordering of format parsers is crucial if two parsers may be able to parse the sa
 parser identified with `canParse` wins!
 
 ```javascript
-import { Parser } from '@openaip/openaip-coordinate-parser';
-import { IFormatParser } from '@openaip/openaip-coordinate-parser/formats/base-format.js';
-import { DecimalUnsignedFormat } from '@openaip/openaip-coordinate-parser/formats/decimal-format.js';
+import { Parser } from '@openaip/coordinate-parser';
+import { IFormatParser } from '@openaip/coordinate-parser/formats/base-format.js';
+import { DecimalUnsignedFormat } from '@openaip/coordinate-parser/formats/decimal-format.js';
 
 // available format parser
 const decimalParser = new DecimalUnsignedFormat({ precision: 5 });
