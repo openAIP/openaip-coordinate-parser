@@ -20,16 +20,16 @@
         }
     ],
     "type": "module",
-    "module": "./dist/esm/index.js",
+    "module": "./dist/esm/index.mjs",
     "exports": {
         "./package.json": "./package.json",
         ".": {
             "import": {
-                "types": "./dist/esm/index.d.mts",
+                "types": "./dist/esm/types/index.d.mts",
                 "default": "./dist/esm/index.mjs"
             },
             "require": {
-                "types": "./dist/cjs/index.d.cts",
+                "types": "./dist/cjs/types/index.d.cts",
                 "default": "./dist/cjs/index.cjs"
             }
         }
@@ -50,8 +50,8 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "build:cjs": "tsc -p tsconfig.cjs.json",
-        "build:esm": "tsc -p tsconfig.esm.json && npm run rename:esm",
+        "build:cjs": "tsc -p tsconfig.cjs.json && mv ./dist/cjs/index.js ./dist/cjs/index.cjs && mv ./dist/cjs/types/index.d.ts ./dist/cjs/types/index.d.cts",
+        "build:esm": "tsc -p tsconfig.esm.json && mv ./dist/esm/index.js ./dist/esm/index.mjs && mv ./dist/esm/types/index.d.ts ./dist/esm/types/index.d.mts",
         "build": "npm run clean && npm run build:cjs && npm run build:esm",
         "clean": "rimraf dist",
         "rename:esm": "/bin/bash ./prepare-esm.sh",
