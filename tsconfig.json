@@ -3,8 +3,6 @@
         "lib": [
             "esnext"
         ],
-        "declaration": true,
-        "declarationDir": "./dist/types",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
