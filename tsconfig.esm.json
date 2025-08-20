@@ -5,6 +5,6 @@
         "target": "esnext",
         "outDir": "./dist/esm",
         "declaration": true,
-        "declarationDir": "./dist/esm/types"
+        "declarationDir": "./dist/esm"
     }
 }
