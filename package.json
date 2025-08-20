@@ -50,8 +50,8 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "build:cjs": "tsc -p tsconfig.cjs.json && mv ./dist/cjs/index.js ./dist/cjs/index.cjs && mv ./dist/cjs/types/index.d.ts ./dist/cjs/types/index.d.cts",
-        "build:esm": "tsc -p tsconfig.esm.json && mv ./dist/esm/index.js ./dist/esm/index.mjs && mv ./dist/esm/types/index.d.ts ./dist/esm/types/index.d.mts",
+        "build:cjs": "tsc -p tsconfig.cjs.json && mv ./dist/cjs/index.js ./dist/cjs/index.cjs && mv ./dist/cjs/index.d.ts ./dist/cjs/index.d.cts",
+        "build:esm": "tsc -p tsconfig.esm.json && mv ./dist/esm/index.js ./dist/esm/index.mjs && mv ./dist/esm/index.d.ts ./dist/esm/index.d.mts",
         "build": "npm run clean && npm run build:cjs && npm run build:esm",
         "clean": "rimraf dist",
         "rename:esm": "/bin/bash ./prepare-esm.sh",
