@@ -3,6 +3,8 @@
         "lib": [
             "esnext"
         ],
+        "target": "ES2022",
+        "module": "Node16",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
@@ -10,7 +12,7 @@
         "useUnknownInCatchVariables": false,
         "noImplicitAny": true,
         "noUnusedParameters": false,
-        "moduleResolution": "node",
+        "moduleResolution": "node16",
         "rootDir": "./src",
         "baseUrl": ".",
     },
