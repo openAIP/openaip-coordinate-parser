@@ -24,7 +24,6 @@
         ".": {
             "import": {
                 "types": "./dist/esm/index.d.ts",
-                "package": "./dist/esm/package.json",
                 "default": "./dist/esm/index.js"
             },
             "require": {
@@ -59,12 +58,10 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "build:esm": "tsc -p tsconfig.esm.json && npm run prepare:esm",
-        "build:cjs": "tsc -p tsconfig.cjs.json && for f in ./dist/cjs/*.js; do mv \"$f\" \"${f%.js}.cjs\"; done && for f in ./dist/cjs/*.d.ts; do mv \"$f\" \"${f%.d.ts}.d.cts\"; done",
-        "build": "npm run clean && npm run build:cjs && npm run build:esm",
+        "build:esm": "tsc -p tsconfig.esm.json",
+        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build": "npm run build:cjs && npm run build:esm && && node prepare-dist.js && /bin/bash ./prepare-esm.sh",
         "clean": "rimraf dist",
-        "prepare:esm": "/bin/bash ./prepare-esm.sh",
-        "prepack": "npm run clean && npm run build",
         "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
         "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
         "test": "vitest run --coverage",
