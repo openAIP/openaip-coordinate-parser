@@ -1,11 +1,27 @@
 {
-    "extends": "./tsconfig.json",
     "compilerOptions": {
+        "esModuleInterop": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitAny": true,
+        "noUnusedParameters": false,
+        "rootDir": "./src",
+        "baseUrl": ".",
+        // ESM export related config
         "module": "commonjs",
         "moduleResolution": "node",
         "target": "ES2023",
         "outDir": "./dist/cjs",
         "declaration": true,
-        "declarationDir": "./dist/cjs"
-    }
+        "declarationDir": "./dist/cjs",
+        "sourceMap": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ]
 }

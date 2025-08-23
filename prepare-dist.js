@@ -2,6 +2,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 
 const cjsFolder = './dist/cjs';
+const esmFolder = './dist/esm';
 
 async function renameFiles(folderPath) {
     try {
@@ -92,6 +93,27 @@ async function main() {
         console.log('\nStep 2: Updating import and require statements...');
         await updateRequireStatements(cjsFolder);
         console.log('\nProcess completed successfully!');
+
+        await fs.writeFile(
+            path.join(cjsFolder, 'package.json'),
+            JSON.stringify(
+                {
+                    type: 'commonjs',
+                },
+                null,
+                2
+            )
+        );
+        await fs.writeFile(
+            path.join(esmFolder, 'package.json'),
+            JSON.stringify(
+                {
+                    type: 'module',
+                },
+                null,
+                2
+            )
+        );
     } catch (error) {
         console.error('Fatal error:', error);
         process.exit(1);
