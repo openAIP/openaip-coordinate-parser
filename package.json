@@ -19,12 +19,11 @@
             "role": "Lead developer"
         }
     ],
+    "engines": {
+        "node": ">=22.0.0"
+    },
     "type": "module",
-    "main": "./dist/cjs/index.cjs",
-    "module": "./dist/esm/index.mjs",
-    "types": "./dist/esm/index.d.mts",
     "exports": {
-        "./package.json": "./package.json",
         ".": {
             "import": {
                 "types": "./dist/esm/index.d.mts",
@@ -62,9 +61,9 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
+        "build": "npm run clean && npm run build:cjs && npm run build:esm && node prepare-dist.js",
         "build:esm": "tsc -p tsconfig.json",
         "build:cjs": "tsc -p tsconfig.cjs.json",
-        "build": "npm run build:cjs && npm run build:esm && node prepare-dist.js",
         "clean": "rimraf dist",
         "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
         "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
