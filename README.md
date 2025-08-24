@@ -8,6 +8,12 @@ add other format parsers are always welcome!
 
 This is an ESM only package that requires Node 22 thus allowing CommonJS consumers to `require` it if necessary.
 
+# Install
+
+```shell
+npm install @openaip/coordinate-parser
+```
+
 ### Usage
 
 The parser provides parsing all known formats right out-of-the-box:
