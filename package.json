@@ -23,26 +23,17 @@
         "node": ">=22.0.0"
     },
     "type": "module",
+    "main": "./dist/index.js",
     "exports": {
         ".": {
-            "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
-            },
-            "require": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
-            }
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./dist/index.js"
         },
         "./*": {
-            "import": {
-                "types": "./dist/*.d.ts",
-                "default": "./dist/*.js"
-            },
-            "require": {
-                "types": "./dist/*.d.ts",
-                "default": "./dist/*.js"
-            }
+            "types": "./dist/*.d.ts",
+            "import": "./dist/*.js",
+            "default": "./dist/*.js"
         }
     },
     "files": [
@@ -62,8 +53,7 @@
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
         "build": "npm run clean && npm run build:esm",
-        "build:esm": "tsc -p tsconfig.json",
-        "build:cjs": "tsc -p tsconfig.cjs.json",
+        "build:esm": "tsc -p tsconfig.json && node prepare-dist.js",
         "clean": "rimraf dist",
         "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
         "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
