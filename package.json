@@ -52,8 +52,7 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "build": "npm run clean && npm run build:esm",
-        "build:esm": "tsc -p tsconfig.json",
+        "build": "npm run clean && tsc -p tsconfig.json",
         "clean": "rimraf dist",
         "sca:watch:types": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run tsc:run'",
         "sca:watch:lint": "npx chokidar '**/*.js' '**/*.ts' -c 'npm run lint'",
