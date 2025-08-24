@@ -112,15 +112,15 @@ async function updateRequireStatements(folderPath, isEsm = false) {
 
 async function main() {
     try {
-        console.log('Step 1: Renaming CJS files...');
-        await renameFiles(cjsFolder, false);
-        console.log('\nStep 2: Renaming ESM files...');
-        await renameFiles(esmFolder, true);
+        // console.log('Step 1: Renaming CJS files...');
+        // await renameFiles(cjsFolder, false);
+        // console.log('\nStep 2: Renaming ESM files...');
+        // await renameFiles(esmFolder, true);
 
-        console.log('\nStep 3: Updating CJS import/require statements...');
-        await updateRequireStatements(cjsFolder, false);
-        console.log('\nStep 4: Updating ESM import statements...');
-        await updateRequireStatements(esmFolder, true);
+        // console.log('\nStep 3: Updating CJS import/require statements...');
+        // await updateRequireStatements(cjsFolder, false);
+        // console.log('\nStep 4: Updating ESM import statements...');
+        // await updateRequireStatements(esmFolder, true);
 
         console.log('\nStep 5: Creating package.json files...');
         await fs.writeFile(

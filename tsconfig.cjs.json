@@ -8,14 +8,12 @@
         "noUnusedParameters": false,
         "rootDir": "./src",
         "baseUrl": ".",
-        // ESM export related config
         "module": "commonjs",
-        "moduleResolution": "node",
-        "target": "ES2023",
+        "moduleResolution": "node10",
+        "target": "es6",
         "outDir": "./dist/cjs",
         "declaration": true,
-        "declarationDir": "./dist/cjs",
-        "sourceMap": true
+        "declarationDir": "./dist/cjs"
     },
     "include": [
         "src"

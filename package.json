@@ -26,22 +26,22 @@
     "exports": {
         ".": {
             "import": {
-                "types": "./dist/esm/index.d.mts",
-                "default": "./dist/esm/index.mjs"
+                "types": "./dist/esm/index.d.ts",
+                "default": "./dist/esm/index.js"
             },
             "require": {
-                "types": "./dist/cjs/index.d.cts",
-                "default": "./dist/cjs/index.cjs"
+                "types": "./dist/cjs/index.d.ts",
+                "default": "./dist/cjs/index.js"
             }
         },
         "./*": {
             "import": {
-                "types": "./dist/esm/*.d.mts",
-                "default": "./dist/esm/*.mjs"
+                "types": "./dist/esm/*.d.ts",
+                "default": "./dist/esm/*.js"
             },
             "require": {
-                "types": "./dist/cjs/*.d.cts",
-                "default": "./dist/cjs/*.cjs"
+                "types": "./dist/cjs/*.d.ts",
+                "default": "./dist/cjs/*.js"
             }
         }
     },
