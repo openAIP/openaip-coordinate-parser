@@ -14,7 +14,7 @@ npm install @openaip/coordinate-parser
 
 This is an ESM only package that requires Node 22 thus allowing CommonJS consumers to `require` it if necessary.
 
-### Usage
+# Usage
 
 The parser provides parsing all known formats right out-of-the-box:
 
