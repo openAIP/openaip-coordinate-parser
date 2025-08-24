@@ -4,15 +4,15 @@ Easily extendable and configurable parser for NodeJS and the browser that extrac
 of formatted lat/lon strings. The main focus is parsing various decimal or DMS format variations. Contributions that
 add other format parsers are always welcome!
 
-### ESM only package
-
-This is an ESM only package that requires Node 22 thus allowing CommonJS consumers to `require` it if necessary.
-
 # Install
 
 ```shell
 npm install @openaip/coordinate-parser
 ```
+
+### ESM only package
+
+This is an ESM only package that requires Node 22 thus allowing CommonJS consumers to `require` it if necessary.
 
 ### Usage
 
