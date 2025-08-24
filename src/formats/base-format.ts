@@ -179,8 +179,5 @@ export class BaseFormat implements IFormatParser {
     /**
      * Resets the parser to its initial state.
      */
-    reset(): void {
-        this.latitude = undefined;
-        this.longitude = undefined;
-    }
+    reset(): void {}
 }

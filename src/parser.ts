@@ -6,6 +6,7 @@ import { DecimalSignedSuffixedHemisphereFormat } from './formats/decimal-signed-
 import { DecimalUnsignedFormat } from './formats/decimal-unsigned-format.js';
 import { DecimalUnsignedPrefixedHemisphereFormat } from './formats/decimal-unsigned-prefixed-hemisphere-format.js';
 import { DecimalUnsignedSuffixedHemisphereFormat } from './formats/decimal-unsigned-suffixed-hemisphere-format.js';
+import { DmSignedPrefixedHemisphereFormat } from './formats/dm-signed-prefixed-hemisphere-format.js';
 import { DmSignedSuffixedHemisphereFormat } from './formats/dm-signed-suffixed-hemisphere-format.js';
 import { DmUnsignedDelimitedPrefixedHemisphereFormat } from './formats/dm-unsigned-delimited-prefixed-hemisphere-format.js';
 import { DmUnsignedDelimitedSuffixedHemisphereFormat } from './formats/dm-unsigned-delimited-suffixed-hemisphere-format.js';
@@ -22,7 +23,6 @@ import { DmsUnsignedDelimitedSuffixedHemisphereFormat } from './formats/dms-unsi
 import { DmsUnsignedFormat } from './formats/dms-unsigned-format.js';
 import type { Coordinate } from './types.js';
 import { validateSchema } from './validate-schema.js';
-import { DmSignedPrefixedHemisphereFormat } from './formats/dm-signed-prefixed-hemisphere-format.js';
 
 export const OptionsSchema = z
     .object({
@@ -84,8 +84,6 @@ export class Parser {
             formatParsers = [...defaultParsers, ...formatParsers];
         }
         this.opts = { precision: precision };
-        this.latitude = undefined;
-        this.longitude = undefined;
         this.parsers = formatParsers;
     }
 
@@ -109,20 +107,10 @@ export class Parser {
         return parser;
     }
 
-    getLatitude(): number | undefined {
-        return this.latitude;
-    }
-
-    getLongitude(): number | undefined {
-        return this.longitude;
-    }
-
     /**
      * Resets the parser to its initial state.
      */
     reset(): void {
-        this.latitude = undefined;
-        this.longitude = undefined;
         this.parsers.forEach((p) => p.reset());
     }
 }
