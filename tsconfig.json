@@ -8,13 +8,12 @@
         "noUnusedParameters": false,
         "rootDir": "./src",
         "baseUrl": ".",
-        // ESM export related config
         "module": "nodenext",
         "moduleResolution": "nodenext",
         "target": "es6",
-        "outDir": "./dist/esm",
+        "outDir": "./dist",
         "declaration": true,
-        "declarationDir": "./dist/esm"
+        "declarationDir": "./dist"
     },
     "include": [
         "src"
