@@ -79,7 +79,6 @@
         "@vitest/ui": "^3.2.4",
         "depcheck": "^1.4.7",
         "npm-check-updates": "^17.1.18",
-        "rimraf": "^6.0.1",
         "typescript": "^5.9.2",
         "vite": "^6.3.6",
         "vitest": "^3.2.4"
