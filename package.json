@@ -53,6 +53,7 @@
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
         "test": "vitest run --coverage",
+        "test:watch": "vitest run --watch --ui --coverage",
         "build": "npm run tsc:clean && npm run tsc:build",
         "tsc:run": "tsc --noEmit",
         "tsc:clean": "tsc --build --clean",
@@ -72,8 +73,6 @@
     },
     "devDependencies": {
         "@biomejs/biome": "2.2.6",
-        "@types/jsonwebtoken": "^9.0.10",
-        "@types/luxon": "^3.7.1",
         "@types/node": "^22.18.5",
         "@vitest/coverage-v8": "^3.2.4",
         "@vitest/ui": "^3.2.4",
