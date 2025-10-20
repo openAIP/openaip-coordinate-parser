@@ -58,7 +58,7 @@ export class DmUnsignedDelimitedSuffixedHemisphereFormat extends BaseFormat {
                 degrees: parseInt(match[1], 10),
                 minutes: parseInt(match[2], 10),
                 seconds: Math.round(60 * parseFloat(`0${match[3]}`)),
-                direction: match[4],
+                direction: match[4] as 'N' | 'S',
             };
         } else {
             throw new Error('Invalid coordinate string');

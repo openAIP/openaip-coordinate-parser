@@ -32,10 +32,10 @@ export class DmSignedPrefixedHemisphereFormat extends BaseFormat {
         }
         const matchLatDegree = match[2];
         const matchLatMinutes = match[3];
-        const matchLatDirection = match[1];
+        const matchLatDirection = match[1] as 'N' | 'S';
         const matchLonDegree = match[6];
         const matchLonMinutes = match[7];
-        const matchLonDirection = match[5];
+        const matchLonDirection = match[5] as 'E' | 'W';
 
         this.enforceValidLatitudeDegrees(matchLatDegree, false);
         this.enforceValidMinutes(matchLatMinutes);
@@ -50,12 +50,12 @@ export class DmSignedPrefixedHemisphereFormat extends BaseFormat {
         const decimalLat = this.dmToDecimal({
             degrees: Math.abs(latDegree),
             minutes: latMinutes,
-            direction: matchLatDirection,
+            direction: matchLatDirection as 'N' | 'S',
         });
         const decimalLon = this.dmToDecimal({
             degrees: Math.abs(lonDegree),
             minutes: lonMinutes,
-            direction: matchLonDirection,
+            direction: matchLonDirection as 'E' | 'W',
         });
 
         const lat = decimalLat.toFixed(this.precision);

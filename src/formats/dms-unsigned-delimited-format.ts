@@ -3,7 +3,7 @@ import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^(-?\d+):(\d+):(\d+(?:\.\d+)?)\s*\,?\s*(-?\d+):(\d+):(\d+(?:\.\d+)?)$/;
+const REGEX = /^(-?\d+):(\d+):(\d+(?:\.\d+)?)\s*,?\s*(-?\d+):(\d+):(\d+(?:\.\d+)?)$/;
 
 /**
  * Supported formats:

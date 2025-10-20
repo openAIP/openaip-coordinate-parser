@@ -25,4 +25,20 @@ describe('dmsToDecimal', () => {
         const result = baseFormat.dmsToDecimal({ degrees: 45, minutes: 12, seconds: 34, direction: 'W' });
         expect(result).toBe(-45.20944444444445);
     });
+
+    it('rejects invalid minutes range', () => {
+        const baseFormat = new BaseFormat();
+
+        expect(() => baseFormat.dmsToDecimal({ degrees: 45, minutes: 60, seconds: 34, direction: 'W' })).toThrowError(
+            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [minutes]: Number must be less than or equal to 59. Received: {"degrees":45,"minutes":60,"seconds":34,"direction":"W"}`
+        );
+    });
+
+    it('rejects invalid seconds range', () => {
+        const baseFormat = new BaseFormat();
+
+        expect(() => baseFormat.dmsToDecimal({ degrees: 45, minutes: 56, seconds: 60, direction: 'W' })).toThrowError(
+            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [seconds]: Number must be less than or equal to 59. Received: {"degrees":45,"minutes":56,"seconds":60,"direction":"W"}`
+        );
+    });
 });

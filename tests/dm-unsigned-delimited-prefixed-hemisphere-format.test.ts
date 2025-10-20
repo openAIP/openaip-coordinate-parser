@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DmUnsignedDelimitedPrefixedHemisphereFormat } from '../src/formats/dm-unsigned-delimited-prefixed-hemisphere-format';
+import { DmUnsignedDelimitedPrefixedHemisphereFormat } from '../src/formats/dm-unsigned-delimited-prefixed-hemisphere-format.js';
 
 describe('canParse', () => {
     it('returns true for known formats', () => {

@@ -3,7 +3,7 @@ import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^([NS])\s*(\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"\s*,?\s*([EW])\s*(\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)\"$/;
+const REGEX = /^([NS])\s*(\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)"\s*,?\s*([EW])\s*(\d+)°\s*(\d+)'\s*(\d+(?:\.\d+)?)"$/;
 
 /**
  * Supported formats:
@@ -53,13 +53,13 @@ export class DmsSignedPrefixedHemisphereFormat extends BaseFormat {
             degrees: Math.abs(latDegree),
             minutes: latMinutes,
             seconds: latSeconds,
-            direction: matchLatDirection,
+            direction: matchLatDirection as 'N' | 'S',
         });
         const decimalLon = this.dmsToDecimal({
             degrees: Math.abs(lonDegree),
             minutes: lonMinutes,
             seconds: lonSeconds,
-            direction: matchLonDirection,
+            direction: matchLonDirection as 'E' | 'W',
         });
 
         const lat = decimalLat.toFixed(this.precision);

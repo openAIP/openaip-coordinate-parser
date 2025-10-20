@@ -52,13 +52,13 @@ export class DmsBlockPrefixedHemisphereFormat extends BaseFormat {
             degrees: Math.abs(latDegree),
             minutes: latMinutes,
             seconds: latSeconds,
-            direction: matchLatDirection,
+            direction: matchLatDirection as 'N' | 'S',
         });
         const decimalLon = this.dmsToDecimal({
             degrees: Math.abs(lonDegree),
             minutes: lonMinutes,
             seconds: lonSeconds,
-            direction: matchLonDirection,
+            direction: matchLonDirection as 'E' | 'W',
         });
 
         const lat = decimalLat.toFixed(this.precision);

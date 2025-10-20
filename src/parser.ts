@@ -111,6 +111,8 @@ export class Parser {
      * Resets the parser to its initial state.
      */
     reset(): void {
-        this.parsers.forEach((p) => p.reset());
+        this.parsers.forEach((p) => {
+            p.reset();
+        });
     }
 }
