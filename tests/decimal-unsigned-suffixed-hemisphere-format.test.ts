@@ -52,4 +52,11 @@ describe('parse', () => {
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
+
+    it(`returns the correct latitude and longitude for 1.234S,5.678W`, () => {
+        const formatParser = new DecimalUnsignedSuffixedHemisphereFormat();
+        const result = formatParser.parse(`1.234S,5.678W`);
+        expect(result.latitude).toBe(-1.234);
+        expect(result.longitude).toBe(-5.678);
+    });
 });

@@ -2,7 +2,8 @@ import { z } from 'zod';
 import { isNumeric } from '../is-numeric.js';
 import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
-import { BaseFormat } from './base-format.js';
+import { AbstractDecimalHemisphereFormat } from './abstract-decimal-hemisphere-format.js';
+import type { Hemisphere } from './base-format.js';
 
 const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([EW])$/;
 
@@ -16,7 +17,7 @@ const REGEX = /^(-?\d{1,2}(\.\d+)?)\s*([NS])\s*[, ]?\s*(-?\d{1,3}(\.\d+)?)\s*([E
  * 12.234N56.678E
  * ... and additional variants with spaces and comma.
  */
-export class DecimalUnsignedSuffixedHemisphereFormat extends BaseFormat {
+export class DecimalUnsignedSuffixedHemisphereFormat extends AbstractDecimalHemisphereFormat {
     parse(coordinateString: string): Coordinate {
         validateSchema(coordinateString, z.string(), { assert: true, name: 'coordinateString' });
 
@@ -29,19 +30,27 @@ export class DecimalUnsignedSuffixedHemisphereFormat extends BaseFormat {
             throw new Error('Invalid coordinate string');
         }
         const latitude = match[1];
+        const latitudeDirection = match[3];
         const longitude = match[4];
-        if (isNumeric(latitude) === false || isNumeric(longitude) === false) {
+        const longitudeDirection = match[6];
+
+        if (
+            isNumeric(latitude) === false ||
+            isNumeric(longitude) === false ||
+            ['N', 'S'].includes(latitudeDirection) === false ||
+            ['E', 'W'].includes(longitudeDirection) === false
+        ) {
             throw new Error('Invalid coordinate string');
         }
 
         this.enforceValidLatitude(latitude);
         this.enforceValidLongitude(longitude);
-        const lat = parseFloat(latitude).toFixed(this.precision);
-        const lon = parseFloat(longitude).toFixed(this.precision);
+        const lat = parseFloat(parseFloat(latitude).toFixed(this.precision));
+        const lon = parseFloat(parseFloat(longitude).toFixed(this.precision));
 
         return {
-            latitude: parseFloat(lat),
-            longitude: parseFloat(lon),
+            latitude: this.toDecimal(lat, latitudeDirection as Hemisphere),
+            longitude: this.toDecimal(lon, longitudeDirection as Hemisphere),
         };
     }
 

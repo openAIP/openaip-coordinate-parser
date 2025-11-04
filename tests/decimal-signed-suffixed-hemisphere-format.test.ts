@@ -53,4 +53,18 @@ describe('parse', () => {
         expect(result.latitude).toBe(1.234);
         expect(result.longitude).toBe(5.678);
     });
+
+    it(`returns the correct latitude and longitude for 36.156120°N 95.984950°W`, () => {
+        const formatParser = new DecimalSignedSuffixedHemisphereFormat();
+        const result = formatParser.parse(`36.156120°N 95.984950°W`);
+        expect(result.latitude).toBe(36.15612);
+        expect(result.longitude).toBe(-95.98495);
+    });
+
+    it(`returns the correct latitude and longitude for 36.156120°S 95.984950°W`, () => {
+        const formatParser = new DecimalSignedSuffixedHemisphereFormat();
+        const result = formatParser.parse(`36.156120°S 95.984950°W`);
+        expect(result.latitude).toBe(-36.15612);
+        expect(result.longitude).toBe(-95.98495);
+    });
 });

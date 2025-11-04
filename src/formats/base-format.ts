@@ -9,6 +9,8 @@ import {
 } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 
+export type Hemisphere = 'N' | 'S' | 'E' | 'W';
+
 export const OptionsSchema = z
     .object({
         precision: z.number().optional(),
