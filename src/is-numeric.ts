@@ -5,7 +5,7 @@ import { z } from 'zod';
  */
 export function isNumeric(value: any): boolean {
     return (
-        (z.string().safeParse(value).success && !isNaN(value) && !isNaN(parseFloat(value))) ||
+        (z.string().safeParse(value).success && !Number.isNaN(value) && !Number.isNaN(parseFloat(value))) ||
         z.number().safeParse(value).success
     );
 }

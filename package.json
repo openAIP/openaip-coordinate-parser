@@ -20,7 +20,7 @@
         }
     ],
     "engines": {
-        "node": ">=22.18.0"
+        "node": ">=24.0.0"
     },
     "type": "module",
     "main": "./dist/index.js",
@@ -52,8 +52,7 @@
     },
     "homepage": "https://github.com/openaip/openaip-coordinate-parser#readme",
     "scripts": {
-        "test": "vitest run --coverage",
-        "test:watch": "vitest run --watch --ui --coverage",
+        "test": "vitest run",
         "build": "npm run tsc:clean && npm run tsc:build",
         "tsc:run": "tsc --noEmit",
         "tsc:clean": "tsc --build --clean",
@@ -72,14 +71,18 @@
         "zod": "^3.25.76"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.2.6",
-        "@types/node": "^22.18.5",
-        "@vitest/coverage-v8": "^3.2.4",
-        "@vitest/ui": "^3.2.4",
+        "@biomejs/biome": "2.3.8",
+        "@types/node": ">=24.10.4",
+        "@vitest/coverage-v8": "^4.0.15",
         "depcheck": "^1.4.7",
-        "npm-check-updates": "^17.1.18",
-        "typescript": "^5.9.2",
-        "vite": "^6.3.6",
-        "vitest": "^3.2.4"
+        "npm-check-updates": "^19.2.0",
+        "typescript": "^5.9.3",
+        "vite": "^7.3.0",
+        "vitest": "^4.0.15"
+    },
+    "comments": {
+        "packages": {
+            "zod": "Version 4 introduces breaking changes!"
+        }
     }
 }
