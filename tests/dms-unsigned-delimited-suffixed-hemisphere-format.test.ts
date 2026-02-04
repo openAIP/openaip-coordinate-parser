@@ -47,11 +47,12 @@ describe('parse', () => {
         expect(result.longitude).toBe(-74.12306);
     });
 
-    it(`returns the correct latitude and longitude for 40:7:23.9999N, 74:7:23.9999W`, () => {
+    it(`returns the correct latitude and longitude for 40:7:59.9999N, 74:7:59.9999W`, () => {
         const formatParser = new DmsUnsignedDelimitedSuffixedHemisphereFormat({ precision: 5 });
-        const result = formatParser.parse(`40:7:23.9999N, 74:7:23.9999W`);
+        const result = formatParser.parse(`40:7:59.9999N, 74:7:59.9999W`);
 
-        expect(result.latitude).toBe(40.12333);
-        expect(result.longitude).toBe(-74.12333);
-    });
+        expect(result.latitude).toBe(40.13333);
+        expect(result.longitude).toBe(-74.13333);
+    });    
+
 });

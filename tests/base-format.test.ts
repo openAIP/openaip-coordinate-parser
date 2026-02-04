@@ -30,7 +30,7 @@ describe('dmsToDecimal', () => {
         const baseFormat = new BaseFormat();
 
         expect(() => baseFormat.dmsToDecimal({ degrees: 45, minutes: 60, seconds: 34, direction: 'W' })).toThrowError(
-            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [minutes]: Number must be less than or equal to 59. Received: {"degrees":45,"minutes":60,"seconds":34,"direction":"W"}`
+            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [minutes]: Number must be less than 60. Received: {"degrees":45,"minutes":60,"seconds":34,"direction":"W"}`
         );
     });
 
@@ -38,7 +38,7 @@ describe('dmsToDecimal', () => {
         const baseFormat = new BaseFormat();
 
         expect(() => baseFormat.dmsToDecimal({ degrees: 45, minutes: 56, seconds: 60, direction: 'W' })).toThrowError(
-            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [seconds]: Number must be less than or equal to 59. Received: {"degrees":45,"minutes":56,"seconds":60,"direction":"W"}`
+            `Schema validation failed for parameter 'dms. Expected to match schema 'Union'. [seconds]: Number must be less than 60. Received: {"degrees":45,"minutes":56,"seconds":60,"direction":"W"}`
         );
     });
 });

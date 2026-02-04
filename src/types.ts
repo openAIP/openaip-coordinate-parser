@@ -13,8 +13,8 @@ export const DmsCoordinateSchema = z.union([
     z
         .object({
             degrees: z.number().min(0).max(90),
-            minutes: z.number().min(0).max(59),
-            seconds: z.number().min(0).max(59),
+            minutes: z.number().min(0).lt(60),
+            seconds: z.number().min(0).lt(60),
             direction: z.enum(['N', 'S']),
         })
         .strict()
@@ -22,8 +22,8 @@ export const DmsCoordinateSchema = z.union([
     z
         .object({
             degrees: z.number().min(0).max(180),
-            minutes: z.number().min(0).max(59),
-            seconds: z.number().min(0).max(59),
+            minutes: z.number().min(0).lt(60),
+            seconds: z.number().min(0).lt(60),
             direction: z.enum(['E', 'W']),
         })
         .strict()
@@ -36,7 +36,7 @@ export const DmCoordinateSchema = z.union([
         .object({
             degrees: z.number().min(0).max(180),
             // decimal minutes
-            minutes: z.number().min(0).max(59),
+            minutes: z.number().min(0).lt(59),
             direction: z.enum(['N', 'S']),
         })
         .strict()
@@ -45,7 +45,7 @@ export const DmCoordinateSchema = z.union([
         .object({
             degrees: z.number().min(0).max(180),
             // decimal minutes
-            minutes: z.number().min(0).max(59),
+            minutes: z.number().min(0).lt(60),
             direction: z.enum(['E', 'W']),
         })
         .strict()
