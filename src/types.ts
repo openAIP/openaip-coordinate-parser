@@ -36,7 +36,7 @@ export const DmCoordinateSchema = z.union([
         .object({
             degrees: z.number().min(0).max(180),
             // decimal minutes
-            minutes: z.number().min(0).lt(59),
+            minutes: z.number().min(0).lt(60),
             direction: z.enum(['N', 'S']),
         })
         .strict()
