@@ -1,4 +1,4 @@
-# OpenAIP Coordinate Parser
+# Coordinate Parser
 
 Easily extendable and configurable parser for NodeJS and the browser that extracts coordinates from a variety
 of formatted lat/lon strings. The main focus is parsing various decimal or DMS format variations. Contributions that
