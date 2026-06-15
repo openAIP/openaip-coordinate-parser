@@ -64,12 +64,13 @@
         "release:patch": "npm version --sign-git-tag patch && git push && git push origin --tags",
         "release:minor": "npm version --sign-git-tag minor && git push && git push origin --tags",
         "release:major": "npm version --sign-git-tag major && git push && git push origin --tags",
-        "run-security-audit": "npm audit fix --omit=dev",
-        "update-packages": "ncu --target minor --upgrade && npm install",
+        "run-security-audit": "npm audit fix --omit=peer",
+        "packages:update": "ncu --target minor --upgrade --cooldown 7d && npm install",
+        "packages:outdated": "npm outdated",
         "depcheck": "npx depcheck --oneline --skip-missing=true --ignore-patterns=dist,coverage,*.log"
     },
     "dependencies": {
-        "zod": "^3.25.76"
+        "zod": "^4.4.3"
     },
     "devDependencies": {
         "@biomejs/biome": "2.4.11",
