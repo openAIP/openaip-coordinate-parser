@@ -73,18 +73,14 @@
         "zod": "^4.4.3"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.4.11",
-        "@types/node": ">=24.12.2",
-        "@vitest/coverage-v8": "^4.1.4",
+        "@biomejs/biome": "2.5.0",
+        "@types/node": ">=24.13.1",
+        "@vitest/coverage-v8": "^4.1.8",
         "depcheck": "^1.4.7",
-        "npm-check-updates": "^19.6.6",
-        "typescript": "^5.9.3",
-        "vite": "^7.3.2",
-        "vitest": "^4.1.4"
+        "npm-check-updates": "^22.2.3",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.16",
+        "vitest": "^4.1.8"
     },
-    "comments": {
-        "packages": {
-            "zod": "Version 4 introduces breaking changes!"
-        }
-    }
+    "comments": {}
 }

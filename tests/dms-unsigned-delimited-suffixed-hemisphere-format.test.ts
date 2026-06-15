@@ -53,6 +53,5 @@ describe('parse', () => {
 
         expect(result.latitude).toBe(40.13333);
         expect(result.longitude).toBe(-74.13333);
-    });    
-
+    });
 });
