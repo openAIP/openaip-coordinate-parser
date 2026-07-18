@@ -3,7 +3,7 @@ import type { Coordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
-const REGEX = /^([NS])\s*(\d+)°\s*(\d+(\.\d+)?)'\s*,?\s*([EW])\s*(\d+)°\s*(\d+(\.\d+)?)'$/;
+const REGEX = /^([NS])\s*(\d+)°\s*(\d+(\.\d+)?)'?\s*,?\s*([EW])\s*(\d+)°\s*(\d+(\.\d+)?)'?$/;
 
 /**
  * Supported formats:
@@ -15,6 +15,7 @@ const REGEX = /^([NS])\s*(\d+)°\s*(\d+(\.\d+)?)'\s*,?\s*([EW])\s*(\d+)°\s*(\d+
  * N40°07.38' W74°07.38'
  * N 40° 07.38' W 74° 07.38'
  * N 40° 07.38', W 74° 07.38'
+ * N 40° 07.38 W 74° 07.38
  * ... and additional variants with spaces and comma.
  */
 export class DmSignedPrefixedHemisphereFormat extends BaseFormat {
