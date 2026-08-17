@@ -37,4 +37,11 @@ describe('parse', () => {
         expect(result.latitude).toBe(40.12306);
         expect(result.longitude).toBe(-74.12306);
     });
+
+    it(`returns the correct latitude and longitude for 45:09.99516 N 67:13.07781 W`, () => {
+        const formatParser = new DmUnsignedDelimitedSuffixedHemisphereFormat();
+        const result = formatParser.parse(`45:09.99516 N 67:13.07781 W`);
+        expect(result.latitude).toBe(45.16667);
+        expect(result.longitude).toBe(-67.21806);
+    });
 });

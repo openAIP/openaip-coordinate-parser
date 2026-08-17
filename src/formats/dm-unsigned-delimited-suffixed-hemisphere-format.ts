@@ -54,12 +54,25 @@ export class DmUnsignedDelimitedSuffixedHemisphereFormat extends BaseFormat {
 
         const match = value.match(/^(\d{2,3}):(\d{2})(\.\d+)?\s*([NSWE])$/);
         if (match) {
-            return {
-                degrees: parseInt(match[1], 10),
-                minutes: parseInt(match[2], 10),
-                seconds: Math.round(60 * parseFloat(`0${match[3]}`)),
-                direction: match[4] as 'N' | 'S',
-            };
+            let degrees = parseInt(match[1], 10);
+            let minutes = parseInt(match[2], 10);
+            let seconds = Math.round(60 * parseFloat(`0${match[3]}`));
+            const direction = match[4] as 'N' | 'S';
+
+            /*
+            Due to rounding, minutes or seconds may be rounded to 60 which is tecnically correct but
+            wrong as notation. Increment higher unit value by 1 if either seconds or minutes are 60.
+            */
+            if (seconds === 60) {
+                minutes++;
+                seconds = 0;
+            }
+            if (minutes === 60) {
+                degrees++;
+                minutes = 0;
+            }
+
+            return { degrees, minutes, seconds, direction };
         } else {
             throw new Error('Invalid coordinate string');
         }
