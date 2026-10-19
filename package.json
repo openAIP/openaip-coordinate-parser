@@ -70,17 +70,17 @@
         "depcheck": "npx depcheck --oneline --skip-missing=true --ignore-patterns=dist,coverage,*.log"
     },
     "dependencies": {
-        "zod": "^4.4.3"
+        "zod": "^4.6.7"
     },
     "devDependencies": {
-        "@biomejs/biome": "2.5.0",
-        "@types/node": ">=24.13.1",
-        "@vitest/coverage-v8": "^4.1.8",
+        "@biomejs/biome": "2.5.15",
+        "@types/node": ">=26.6.5",
+        "@vitest/coverage-v8": "^5.0.5",
         "depcheck": "^1.4.7",
-        "npm-check-updates": "^22.2.3",
-        "typescript": "^6.0.3",
-        "vite": "^8.0.16",
-        "vitest": "^4.1.8"
+        "npm-check-updates": "^23.1.1",
+        "typescript": "^7.0.2",
+        "vite": "^8.3.4",
+        "vitest": "^5.0.5"
     },
     "comments": {}
 }
