@@ -20,7 +20,7 @@
         }
     ],
     "engines": {
-        "node": ">=24.0.0"
+        "node": ">=24.15.0"
     },
     "type": "module",
     "main": "./dist/index.js",
@@ -61,9 +61,9 @@
         "code:fix": "npx @biomejs/biome check --write",
         "code:format": "npx @biomejs/biome format --write",
         "code:lint": "npx @biomejs/biome lint",
-        "release:patch": "npm version --sign-git-tag patch && git push && git push origin --tags",
-        "release:minor": "npm version --sign-git-tag minor && git push && git push origin --tags",
-        "release:major": "npm version --sign-git-tag major && git push && git push origin --tags",
+        "release:patch": "npm run code:check && npm run test && npm version --sign-git-tag patch && git push && git push origin --tags",
+        "release:minor": "npm run code:check && npm run test && npm version --sign-git-tag minor && git push && git push origin --tags",
+        "release:major": "npm run code:check && npm run test && npm version --sign-git-tag major && git push && git push origin --tags",
         "run-security-audit": "npm audit fix --omit=peer",
         "packages:update": "ncu --target minor --upgrade --cooldown 7d && npm install",
         "packages:outdated": "npm outdated",
