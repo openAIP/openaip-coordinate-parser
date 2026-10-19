@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { Coordinate, DmsCoordinate } from '../types.js';
+import type { Coordinate, DmCoordinate } from '../types.js';
 import { validateSchema } from '../validate-schema.js';
 import { BaseFormat } from './base-format.js';
 
@@ -29,12 +29,12 @@ export class DmUnsignedDelimitedPrefixedHemisphereFormat extends BaseFormat {
         }
         const latitude = match[1];
         const longitude = match[3];
-        // to DMS
-        const dmsLat = this.toDms(latitude.replace(/\s/g, ''));
-        const dmsLon = this.toDms(longitude.replace(/\s/g, ''));
-        // DMS to decimal
-        const decimalLat = this.dmsToDecimal(dmsLat);
-        const decimalLon = this.dmsToDecimal(dmsLon);
+        // to DM
+        const dmLat = this.toDm(latitude.replace(/\s/g, ''));
+        const dmLon = this.toDm(longitude.replace(/\s/g, ''));
+        // DM to decimal
+        const decimalLat = this.dmToDecimal(dmLat);
+        const decimalLon = this.dmToDecimal(dmLon);
         this.enforceValidLatitude(decimalLat);
         this.enforceValidLongitude(decimalLon);
         const lat = decimalLat.toFixed(this.precision);
@@ -47,17 +47,16 @@ export class DmUnsignedDelimitedPrefixedHemisphereFormat extends BaseFormat {
     }
 
     /**
-     * Converts a DM notation coordinate like "4007.38N" to DMS parts.
+     * Converts a DM notation coordinate like "N40:07.38" to DM parts i.e. degrees and decimal minutes.
      */
-    toDms(value: string): DmsCoordinate {
+    toDm(value: string): DmCoordinate {
         validateSchema(value, z.string(), { assert: true, name: 'value' });
 
         const match = value.match(/^([NSWE])(\d{2,3}):(\d{2})(\.\d+)?$/);
         if (match) {
             return {
                 degrees: parseInt(match[2], 10),
-                minutes: parseInt(match[3], 10),
-                seconds: Math.round(60 * parseFloat(`0${match[4]}`)),
+                minutes: parseInt(match[3], 10) + parseFloat(`0${match[4]}`),
                 direction: match[1] as 'N' | 'S',
             };
         } else {
